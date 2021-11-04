@@ -1,6 +1,6 @@
 """ model for Event reminder web application"""
 from flask_sqlalchemy import SQLAlchemy
-# from sqlalchemy.orm import backref
+from sqlalchemy.orm import backref
 from datetime import datetime
 
 db = SQLAlchemy()
@@ -33,7 +33,7 @@ class Birthday(db.Model):
     gender = db.Column(db.String)
     relation = db. Column(db.String)
     phone_number = db.Column(db.String, nullable = False)
-    birth_date = db.Column(db.Datetime, nullable = False)
+    birth_date = db.Column(db.DateTime, nullable = False)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
 
     def __repr__(self):
@@ -52,7 +52,7 @@ class Demise(db.Model):
     name = db.Column(db.String,nullable = False)
     gender = db.Column(db.String)
     relation = db. Column(db.String)
-    demise_date = db.Column(db.Datetime,nullable = False)
+    demise_date = db.Column(db.DateTime,nullable = False)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
 
     def __repr__(self):
@@ -72,12 +72,12 @@ class Wedlock(db.Model):
     wedding_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     mr_name = db.Column(db.String,nullable = False)
     mrs_name = db.Column(db.String,nullable = False)
-    relation = db. Column(db.String)
-    mr_Phone_number = db.Column(db.String,unique=True,nullable = False)
-    mrs_Phone_number = db.Column(db.String,unique=True,nullable = False)
     mr_email = db.Column(db.String,unique=True,nullable = False)
     mrs_email = db.Column(db.String,unique=True,nullable = False)
-    wedding_date = db.Column(db.Datetime,nullable = False)
+    mr_Phone_number = db.Column(db.String,unique=True,nullable = False)
+    mrs_Phone_number = db.Column(db.String,unique=True,nullable = False)
+    wedding_date = db.Column(db.DateTime,nullable = False)
+    relation = db. Column(db.String)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
 
     def __repr__(self):
@@ -94,8 +94,8 @@ class Vacation(db.Model):
     __tablename__ = "vacation"
     vac_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     location_name = db.Column(db.String)
-    vac_start_date = db.Column(db.Datetime)
-    vac_end_date = db.Column(db.Datetime)
+    vac_start_date = db.Column(db.DateTime)
+    vac_end_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
 
 
@@ -113,7 +113,7 @@ class Festivals(db.Model):
     festive_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     festive_name = db.Column(db.String)
     overview = db.Column(db.String)
-    festive_date = db.Column(db.Datetime)
+    festive_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
 
 
