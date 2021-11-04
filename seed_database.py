@@ -1,6 +1,8 @@
 from datetime import datetime
 import os
 from  random import choice,randint
+
+from sqlalchemy.orm import relation
 import crud
 import model
 import server
@@ -11,27 +13,27 @@ os.system("createdb events")
 model.connect_to_db(server.app)
 model.db.create_all()
 
-# Load movie data from JSON file
-with open("data/movies.json") as f:
-    movie_data = json.loads(f.read())
+# Load birthday data from JSON file
+with open("data/birthday.json") as f:
+    birthday_data = json.loads(f.read())
 
-# Create movies, store them in list so we can use them
+# Create birthdays, store them in list so we can use them
 # to create fake ratings later
-movies_in_db = []
-for movie in movie_data:
-    title, overview,poster_path = (movie["title"],movie["overview"], movie["poster_path"])
-    release_date = datetime.strptime(movie["release_date"],"%Y-%m-%d" )
+birthdays_in_db = []
+for birth in birthday_data:
+    name,relation,email,gender, phone_number = (birth["name"],birth["relation"],birth["email"],birth["gender"],birth["phone_number"])
+    birth_date = datetime.strptime(birth["birth_date"],"%Y-%m-%d" )
 
-    # TODO: get the title, overview, and poster_path from the movie
-    # dictionary. Then, get the release_date and convert it to a
+    # TODO: get the name, relatin, and email from the birthday
+    # dictionary. Then, get the birth_date and convert it to a
     # datetime object with datetime.strptime
     
-    # TODO: create a movie here and append it to movies_in_db
-    add_movie = crud.create_movie(title, overview, release_date, poster_path)
-    movies_in_db.append(add_movie)
+    # TODO: create a birthday here and append it to birthdays_in_db
+    add_birth = crud.create_birthday(email,name,gender,relation, birth_date,)
+    birthdays_in_db.append(add_birth)
  
  # TODO: create a user here
-for n in range(10):
+for n in range(2):
     email = f'user{n}@test.com'  # Voila! A unique email!
     password = 'test'
 
