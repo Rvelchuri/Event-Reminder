@@ -1,0 +1,36 @@
+[  
+  {
+    "mr_name": "Suresh cherukumalli",
+    "mrs_name": "Rajani Velchuri",
+    "mr_email":"suresh@user.com",
+    "mrs_email": "rajani@gmail.com",
+    "mr_Phone_number" : "732-406-2223",
+    "mrs_Phone_number" : "732-814-7184",
+    "wedding_date": "2005-02-17",
+    "relation": "spouse"
+
+  },
+  {
+    
+    "mr_name": "Ram velchuri",
+    "mrs_name": "Madhavi battineni",
+    "mr_email":"ram@user.com",
+    "mrs_email": "madhavi@gmail.com",
+    "mr_Phone_number" : "732-406-2224",
+    "mrs_Phone_number" : "732-814-7174",
+    "wedding_date": "2006-08-05",
+    "relation": "brother"
+  },
+
+  {
+    "mr_name": "prasad paruchuri",
+    "mrs_name": "Neeraja Meka",
+    "mr_email":"ram@user.com",
+    "mrs_email": "neeraja@gmail.com",
+    "mr_Phone_number" : "763-604-2224",
+    "mrs_Phone_number" : "763-814-7174",
+    "wedding_date": "2002-09-24",
+    "relation": "friend"
+  }
+
+]

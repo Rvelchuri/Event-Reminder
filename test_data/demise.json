@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Veeraiah Gorijavolu",
+    "gender": "male",
+    "relation": "grandfather",
+    "demise_date": "2008-06-21"
+  },
+  {
+    "name": "Subbu velchuri",
+    "gender": "male",
+    "relation": "grandfather",
+    "demise_date": "2012-04-23"
+ 
+  },
+  {
+    "name": "Anitha chennupati",
+    "gender": "female",
+    "relation": "friend",
+    "birth_date": "2011-03-22"
+  },
+
+  {
+    "name": "Lalitha K",
+    "gender": "female",
+    "relation": "cousin",
+    "birth_date": "2001-03-25"
+  }
+
+]

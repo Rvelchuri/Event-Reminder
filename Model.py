@@ -1,7 +1,8 @@
 """ model for Event reminder web application"""
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import backref
+from sqlalchemy.orm import composite
 from datetime import datetime
+# from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -12,7 +13,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
-
+    
     birthday = db.relationship('Birthday', back_populates ="user", uselist = False) 
     demise = db.relationship('Demise', back_populates ="user", uselist = False)
     wedlock = db.relationship('Wedlock', back_populates ="user", uselist = False)
@@ -32,12 +33,12 @@ class Birthday(db.Model):
     name = db.Column(db.String,nullable = False)
     gender = db.Column(db.String)
     relation = db. Column(db.String)
-    phone_number = db.Column(db.String, nullable = False)
+    phone_number = db.Column(db.String)
     birth_date = db.Column(db.DateTime, nullable = False)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
 
     def __repr__(self):
-        return f'<Birthday name = {self.name} email={self.email}>'
+        return f'<Birthdays   Name = {self.name} ,  Email={self.email}  , DOB = {self.birth_date}>'
 
     user = db.relationship('User', back_populates ="birthday", uselist = False)
 
@@ -123,7 +124,7 @@ class Festivals(db.Model):
     user = db.relationship('User', back_populates ="festivals", uselist = False)
 
 
-# """ need to check with advisor"""
+
 def connect_to_db(flask_app, db_uri="postgresql:///events", echo=True): 
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo

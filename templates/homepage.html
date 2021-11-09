@@ -1,9 +1,16 @@
+{% extends 'base.html' %}
 
-{% block title %}Event reminder Home{% endblock %}
+
+{% block title %}Event Reminder Home{% endblock %}
 
 {% block body %}
-  <h1>Welcome!</h1>
-  
+
+
+  <h1>Welcome to Event Reminder</h1>
+  <div class="site-wrapper-inner">
+
+    <img src="/static/img/reminder.jpeg">
+  </div>
   <h2>Create an Account</h2>
   <form action="/users" method="POST">
     <p>
@@ -18,6 +25,7 @@
       <input type="submit">
     </p>
   </form>
+  
   <h2>Log In</h2>
   <form action="/login" method="POST">
     <p>
@@ -32,4 +40,7 @@
       <input type="submit">
     </p>
   </form>
+
+
 {% endblock %}
+

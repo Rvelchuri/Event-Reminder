@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}All Birthdays{% endblock %}
+
+{% block body %}
+  <h1>All birthdays</h1>
+
+  <ul>
+    {% for birth in birthday %}
+      <li>
+        
+          {{birth}}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
