@@ -32,6 +32,18 @@ for birth in birthday_data:
     add_birth = crud.create_birthday(email,name,gender,relation, phone_number,birth_date)
     birthdays_in_db.append(add_birth)
  
+
+# Load demise data from JSON file
+with open("test_data/demise.json") as f:
+    demise_data = json.loads(f.read())
+
+    demise_in_db = []
+for demis in demise_data:
+    name,gender,relation = (demis["name"],demis["gender"],demis["relation"])
+    demise_date = datetime.strptime(demis["demise_date"],"%Y-%m-%d" )
+
+    add_demise = crud.create_demise(name,gender,relation,demise_date)
+    demise_in_db.append(add_demise)
  
    
   
