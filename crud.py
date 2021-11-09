@@ -78,6 +78,11 @@ def get_birthday():
     """return all birthdays"""
     return Birthday.query.all()
 
+
+def get_demise():
+    """return all death Anniversaries"""
+    return Demise.query.all()
+
 # def get_event(user_id):
 #     return User.query.get(user_id)
 
