@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}All death Anniversaries{% endblock %}
+
+{% block body %}
+  <h1>All Remembrance Days</h1>
+    <!-- <div class="site-wrapper-inner">
+
+      <img src="/static/img/remembrance.jpeg">
+    </div> -->
+  <ul>
+    {% for dem in demise %}
+      <li>
+        
+          {{dem}}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+
+
+
+
+
