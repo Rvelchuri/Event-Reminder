@@ -57,7 +57,7 @@ class Demise(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
 
     def __repr__(self):
-        return f'<Demise name = {self.name} relation = {self.relation}>'
+        return f'<Demise name = {self.name}, relation = {self.relation},  date ={self.demise_date}>'
 
     user = db.relationship('User', back_populates ="demise", uselist = False)
 
