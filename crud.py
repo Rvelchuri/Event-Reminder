@@ -109,20 +109,32 @@ def get_vacation():
 
 
 
+# def get_upcoming_birthday():
+#     birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
+#     print(birthdate)
+#     birthdate_dict = {}
+#     for bday in birthdate:
+#         day = bday["birth_date"]
+#         now = datetime.now()
+#         nextday_date = datetime.today() + timedelta(days=30)
+#         if day > now and day < nextday_date:
+#             birthdate_dict[bday["name"]] = bday["birth_date"]
+
+#             print (birthdate_dict)
+#     return birthdate_dict
+
+
 def get_upcoming_birthday():
     birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
-    print(birthdate)
     birthdate_dict = {}
     for bday in birthdate:
-        day = bday["birth_date"]
+        day = bday[0]
+        day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
         now = datetime.now()
-        nextday_date = datetime.today() + timedelta(days=30)
-        if day > now and day < nextday_date:
-            birthdate_dict[bday["name"]] = bday["birth_date"]
+        nextday_date = datetime.now() + timedelta(days=30)
+        if day_this_year > now and day_this_year < nextday_date:
+            birthdate_dict[bday[1]] = bday[0]
     return birthdate_dict
-
-
-
 
 
 

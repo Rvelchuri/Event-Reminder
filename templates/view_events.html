@@ -59,7 +59,24 @@
 </ul>
 
 
-<button name="button" value="OK" type="button" onclick="clickfun()">check upcoming birthdays</button>  
+
+
+
+<button name="button" value="OK" type="button" onclick="clickfun()">check upcoming birthdays</button> 
+
+
+<table>
+  <caption>Smaple Data Table</caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Birthday</th>
+    </tr>
+  </thead>
+  <tbody id="tBody"></tbody>
+</table>
+
+
 <script>  
 function clickfun() {
     $.ajax({
@@ -70,13 +87,23 @@ function clickfun() {
         },
       success: function (response) {
         console.log(response)
-      }
+        for (const[key,value] of Object.entries(response)) //
+        {
+          console.log(key);
+          console.log(value)
+          $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
+        }                  
+          
+        
+         },
     })
   }
 
 </script>  
 
 {%endblock%}
+
+
 
 
 
