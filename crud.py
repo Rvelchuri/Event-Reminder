@@ -87,6 +87,10 @@ def get_wedlock():
     """return all wedding Anniversaries"""
     return Wedlock.query.all()
 
+  
+def get_vacation():
+    """return all vacations"""
+    return Vacation.query.all()
 
 def get_birthday_date():
     birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
