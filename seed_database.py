@@ -44,6 +44,20 @@ for demis in demise_data:
 
     add_demise = crud.create_demise(name,gender,relation,demise_date)
     demise_in_db.append(add_demise)
+
+
+
+# Load wedding data from JSON file
+with open("test_data/wedlock.json") as f:
+    wedlock_data = json.loads(f.read())
+
+    wedlock_in_db = []
+for wed in wedlock_data:
+    mr_name,mrs_name,mr_email,mrs_email,mr_Phone_number, mrs_Phone_number,relation = (wed["mr_name"],wed["mrs_name"],wed["mr_email"],wed["mrs_email"],wed["mr_Phone_number"],wed["mrs_Phone_number"],wed["relation"])
+    wedding_date = datetime.strptime(wed["wedding_date"],"%Y-%m-%d" )
+
+    add_wedlock = crud.create_wedlock(mr_name,mrs_name,mr_email,mrs_email,mr_Phone_number,mrs_Phone_number,wedding_date,relation)
+    demise_in_db.append(add_wedlock)
  
    
   
