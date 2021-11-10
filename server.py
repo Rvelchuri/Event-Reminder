@@ -5,8 +5,11 @@ from flask import (Flask, render_template, request, flash, session, redirect)
 from sqlalchemy.orm import relation
 from model import connect_to_db
 import crud
+from datetime import datetime, date, timedelta
 
 from jinja2 import StrictUndefined
+
+upcoming_days=14
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -76,20 +79,90 @@ def all_birthday():
     print ("*******",type(birthday))
     return render_template("birthday_display.html", birthday = birthday)
 
-@app.route('/addbirthday')
+
+
+@app.route('/demise')
+def all_demise():
+    """view all death Anniversaries"""
+    demis_get = crud.get_demise()
+    print(demis_get)
+    print("******************")
+    return render_template("demise_display.html", demise = demis_get)
+
+
+@app.route('/addbirthday', methods=["GET","POST"])
 def add_birthday():
     """Add birthday"""
+    if request.method == "POST":
+    
+        email = request.form.get('email')
+        name = request.form.get('name')
+        gender = request.form.get('gender')
+        relation= request.form.get('relation')
+        phone_number = request.form.get('phone_number')
+        birth_date = datetime.strptime(request.form.get("birth_date"),"%Y-%m-%d" )
 
-    # email = request.form.get['email']
-    # name = request.form.get('name')
-    # gender = request.form.get('gender')
-    # relation= request.form.get('relation')
-    # phone_number = request.form.get('phone_number')
-    # birth_date = request.form.get('birth_date')
-
-    # crud.create_birthday(email, name, gender,relation,phone_number,birth_date)
-    # flash("You've successfully added birthday details")
+        crud.create_birthday(email, name, gender,relation,phone_number,birth_date)
+        flash("You've successfully added birthday details")
     return render_template("add_birthday.html")
+
+
+
+@app.route('/adddemise', methods=["GET","POST"])
+def add_demise():
+    """Add birthday"""
+    if request.method == "POST":
+
+        name = request.form.get('name')
+        gender = request.form.get('gender')
+        relation= request.form.get('relation')
+        phone_number = request.form.get('phone_number')
+        demise_date = datetime.strptime(request.form.get("demise_date"),"%Y-%m-%d" )
+
+        crud.create_birthday(name, gender,relation,phone_number,demise_date)
+        flash("You've successfully added birthday details")
+    return render_template("add_birthday.html")
+
+
+@app.route('/addwedding', methods=["GET","POST"])
+def add_wedlock():
+    """Add wedding"""
+    if request.method == "POST":
+    
+        mr_name = request.form.get('mr_name')
+        mrs_name = request.form.get('mrs_name')
+        mr_email = request.form.get('mr_email')
+        mrs_email = request.form.get('mrs_email')
+        mr_Phone_number = request.form.get('mr_phone_number')
+        mrs_Phone_number = request.form.get('mrs_phone_number')
+        relation = request.form.get('relation')
+        wedding_date = datetime.strptime(request.form.get("wedding_date"),"%Y-%m-%d" )
+
+        crud.create_wedlock(mr_name,mrs_name,mr_email,mrs_email,mr_Phone_number,mrs_Phone_number,wedding_date,relation)
+        flash("You've successfully added wedding details")
+    return render_template("add_wedding.html")
+
+
+
+
+# @app.route('/upcomingbday')
+# def check_event_with_date():
+#     current_date = datetime.strptime (datetime.now(), "%Y-%m-%d" )
+#     # print(current_date)
+
+#     birthday_dates = crud.get_birthday_date()
+
+#     for bday in sorted(birthday_dates):
+#         if current_date == bday: 
+#             print(bday)
+
+#         else
+          
+
+
+    
+    
+
 
 
 if __name__ == "__main__":
