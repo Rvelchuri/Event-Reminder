@@ -16,7 +16,7 @@ app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined 
 
 
-# Replace this with routes and view functions!
+
 @app.route('/')
 def homepage():
     return render_template('homepage.html')
@@ -98,6 +98,14 @@ def all_wedding():
     print(wed_get)
     print("******************")
     return render_template("wedding_display.html", wedding= wed_get)
+
+@app.route('/vacation')
+def all_vacations():
+    """view all vacation list"""
+    vac_get = crud.get_vacation()
+    print(vac_get)
+    print("******************")
+    return render_template("vacation_display.html", vacation = vac_get)
 
 
 @app.route('/addbirthday', methods=["GET","POST"])
