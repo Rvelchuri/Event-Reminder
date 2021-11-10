@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}All vacations {% endblock %}
+
+{% block body %}
+  <h1>All vacations list</h1>
+
+  <ul>
+    {% for vac in vacation %}
+      <li>
+        
+          {{vac.location_name }},
+          {{vac.vac_start_date}},
+          {{vac.vac_end_date}}
+     
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
