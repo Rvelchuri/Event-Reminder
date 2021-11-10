@@ -2,8 +2,7 @@
 
 from sqlalchemy.orm import relation
 from model import db, User,Birthday,Demise,Wedlock,Vacation,Festivals, connect_to_db
-from datetime import datetime
-
+from datetime import datetime, timedelta
 
 # Functions start here! 
 if __name__ == '__main__':
@@ -92,23 +91,35 @@ def get_vacation():
     """return all vacations"""
     return Vacation.query.all()
 
-def get_birthday_date():
+# def get_birthday_date():
+#     birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
+#     print(birthdate)
+#     birthdate_list = []
+#     birthname_list = []
+#     for bday in birthdate:
+        
+#         birthdate_list.append(bday.birth_date)
+#         birthname_list.append(bday.name)
+#         day = datetime.strptime(bday["birth_date"],"%Y-%m-%d" )
+
+#         print(birthdate_list)
+#         print(birthname_list)
+#         print(day)
+#     return (day,birthname_list)
+
+
+
+def get_upcoming_birthday():
     birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
     print(birthdate)
-    birthdate_list = []
-    birthname_list = []
+    birthdate_dict = {}
     for bday in birthdate:
-        
-        birthdate_list.append(bday.birth_date)
-        birthname_list.append(bday.name)
-        day = datetime.strptime(bday["birth_date"],"%Y-%m-%d" )
-
-        print(birthdate_list)
-        print(birthname_list)
-        print(day)
-    return (day,birthname_list)
-
-
+        day = bday["birth_date"]
+        now = datetime.now()
+        nextday_date = datetime.today() + timedelta(days=30)
+        if day > now and day < nextday_date:
+            birthdate_dict[bday["name"]] = bday["birth_date"]
+    return birthdate_dict
 
 
 

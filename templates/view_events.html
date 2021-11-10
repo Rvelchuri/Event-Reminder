@@ -43,13 +43,32 @@
     
 </ul>
 
+<ul>
+  <li><a href = "/addvacation">Add vacation details</a></li>
+    
+</ul>
 
-<button name="button" value="OK" type="button" onclick="clickfun()">check upcmong birthdays</button>  
+<ul>
+  <li><a href = "/addfestival">Add festive details</a></li>
+    
+</ul>
+
+
+<button name="button" value="OK" type="button" onclick="clickfun()">check upcoming birthdays</button>  
 <script>  
-clickfun()
-{  
- window.location = '/upcomingbday'; 
-}  
+function clickfun() {
+    $.ajax({
+      url: 'upcomingbday',
+      type: 'GET',
+       headers:  { 
+        "contentType": 'application/json',
+        },
+      success: function (response) {
+        console.log(response)
+      }
+    })
+  }
+
 </script>  
 
 {%endblock%}
@@ -60,12 +79,3 @@ clickfun()
 
 
 
-<!-- <li><a id = "birthday" href="{{url_for('add_birthdays')}}">Add birthdays</a></li> -->
-
-    <!-- <li><a href="{{url_for('/wedding_display')}}">View all Wedding Anniversaries</a></li>
-
-    <li><a href="{{url_for('/demise_display')}}">View all your Remembrance days</a></li>
-
-    <li><a href="{{url_for('/vacation_display')}}">View all your upcoming vacation list</a></li>
-
-    <li><a href="{{url_for('/festival_display')}}">View all upcoming festivals</a></li> -->

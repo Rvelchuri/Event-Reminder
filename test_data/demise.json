@@ -16,14 +16,14 @@
     "name": "Anitha chennupati",
     "gender": "female",
     "relation": "friend",
-    "birth_date": "2011-03-22"
+    "demise_date": "2011-03-22"
   },
 
   {
     "name": "Lalitha K",
     "gender": "female",
     "relation": "cousin",
-    "birth_date": "2001-03-25"
+    "demise_date": "2001-03-25"
   }
 
 ]

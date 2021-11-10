@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block body %} Please enter vacation details
+ 
+<form action ="/addvacation" method = "post">
+  <div class = "vacation_form">
+
+
+  <label for="location_name">Location Name:</label>
+  <input type="text" id="location_name" name="location_name"><br><br>
+
+  <label for="vac_start_date">Start Date:</label>
+  <input type="text" id="vac_start_date" name="vac_start_date"><br><br>
+
+  <label for="vac_end_date">End Date:</label>
+  <input type="text" id="vac_end_date" name="vac_end_date"><br><br>
+
+  <input type="submit" id="btnsubmit" value="submit">
+  </div>
+</form>
+
+{% endblock %}

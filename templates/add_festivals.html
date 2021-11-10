@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block body %} Please enter Birthday details
+ 
+<form action ="/addfestival" method = "post">
+  <div class = "birthday_form">
+
+  <label for="festive_name">Name:</label>
+  <input type="text" id="festive_name" name="festive_name"><br><br>
+
+  <label for="overview">overview</label>
+  <input type="text" id="overview" name="overview"><br><br>
+
+
+  <label for="festive_date">Date of Birth:</label>
+  <input type="text" id="festive_date" name="festive_date"><br><br>
+
+  <input type="submit" id="btnsubmit" value="submit">
+  </div>
+</form>
+
+{% endblock %}

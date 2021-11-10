@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+{% block body %} Please enter Death Day details
+ 
+<form action ="/adddemise" method = "post">
+  <div class = "demise_form">
+
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name"><br><br>
+
+  <label for="gender">Gender:</label>
+  <input type="text" id="gender" name="gender"><br><br>
+
+  <label for="relation">Relation:</label>
+  <input type="text" id="relation" name="relation"><br><br>
+
+  <label for="demise_date">Deathday:</label>
+  <input type="text" id="demise_date" name="demise_date"><br><br>
+
+  <input type="submit" id="btnsubmit" value="submit">
+  </div>
+</form>
+
+{% endblock %}
