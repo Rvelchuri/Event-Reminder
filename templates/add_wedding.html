@@ -1,0 +1,40 @@
+
+{% extends 'base.html' %}
+{% block body %} Please enter Wedding  details
+ 
+<form action ="/addwedding" method = "post">
+  <div class = "wedding_form">
+  
+
+  <label for="mr_name">Mr.Name:</label>
+  <input type="text" id="mr_name" name="mr_name"><br><br>
+
+  <label for="mrs_name">Mrs.Name:</label>
+  <input type="text" id="mrs_name" name="mrs_name"><br><br>
+
+  <label for="mr_email">Mr.Email:</label>
+  <input type="text" id="mr_email" name="mr_email"><br><br>
+
+  <label for="mrs_email">Mrs.Email:</label>
+  <input type="text" id="mrs_email" name="mrs_email"><br><br>
+
+  <label for="mr_phone_number">Mr.PhoneNumber:</label>
+  <input type="text" id="mr_phone_number" name="mr_phone_number"><br><br>
+
+  <label for="mrs_phone_number">Mrs.PhoneNumber:</label>
+  <input type="text" id="mrs_phone_number" name="mrs_phone_number"><br><br>
+
+
+  <label for="relation">Mr/Mrs Relation:</label>
+  <input type="text" id="relation" name="relation"><br><br>
+
+
+
+  <label for="wedding_date">Date of wedding day:</label>
+  <input type="text" id="wedding_date" name="wedding_date"><br><br>
+
+  <input type="submit" id="btnsubmit" value="submit">
+  </div>
+</form>
+
+{% endblock %}
