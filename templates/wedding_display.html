@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}All weddings{% endblock %}
+
+{% block body %}
+  <h1>All Wedding details</h1>
+
+  <ul>
+    {% for wed in wedding %}
+      <li>
+        
+          {{wed.mr_name }},
+          {{wed.mrs_name }},
+          {{wed.mr_email }},
+          {{wed.mrs_email }},
+          {{wed.mr_Phone_number }},
+          {{wed.mrs_Phone_number }},
+          {{wed.relation }},
+          {{wed.wedding_date}}
+     
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
