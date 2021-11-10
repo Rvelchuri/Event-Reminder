@@ -90,6 +90,16 @@ def all_demise():
     return render_template("demise_display.html", demise = demis_get)
 
 
+
+@app.route('/wedding')
+def all_wedding():
+    """view all wedding Anniversaries"""
+    wed_get = crud.get_wedlock()
+    print(wed_get)
+    print("******************")
+    return render_template("wedding_display.html", wedding= wed_get)
+
+
 @app.route('/addbirthday', methods=["GET","POST"])
 def add_birthday():
     """Add birthday"""

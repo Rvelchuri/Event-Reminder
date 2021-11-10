@@ -34,8 +34,8 @@ def create_demise(name, gender,relation,demise_date):
     db.session.commit()
     return remem
 
-def create_wedlock(mr_name,mrs_name, mr_email,mrs_emial,mr_Phone_number,mrs_Phone_number,wedding_date,relation):
-    weddi = Wedlock(mr_name = mr_name,mrs_name = mrs_name, mr_email= mr_email, mrs_emial = mrs_emial, 
+def create_wedlock(mr_name,mrs_name,mr_email,mrs_email,mr_Phone_number,mrs_Phone_number,wedding_date,relation):
+    weddi = Wedlock(mr_name = mr_name,mrs_name = mrs_name, mr_email= mr_email, mrs_email = mrs_email, 
     mr_Phone_number = mr_Phone_number, mrs_Phone_number = mrs_Phone_number, 
     wedding_date = wedding_date, relation = relation )
 
@@ -69,8 +69,8 @@ def get_user_by_email(email):
 def return_birthday():
     return Birthday.query.all()
 
-        
-def return_birthday_by_user(user_id):
+
+def return_by_birthday():
     return Birthday.query.filter(Birthday.user_id == user_id)
 
 
@@ -83,8 +83,34 @@ def get_demise():
     """return all death Anniversaries"""
     return Demise.query.all()
 
-# def get_event(user_id):
-#     return User.query.get(user_id)
+def get_wedlock():
+    """return all wedding Anniversaries"""
+    return Wedlock.query.all()
+
+
+def get_birthday_date():
+    birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
+    print(birthdate)
+    birthdate_list = []
+    birthname_list = []
+    for bday in birthdate:
+        
+        birthdate_list.append(bday.birth_date)
+        birthname_list.append(bday.name)
+        day = datetime.strptime(bday["birth_date"],"%Y-%m-%d" )
+
+        print(birthdate_list)
+        print(birthname_list)
+        print(day)
+    return (day,birthname_list)
+
+
+
+
+
+
+
+
 
 # def return_user():
 #     return User.query.all()
