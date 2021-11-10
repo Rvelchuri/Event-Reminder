@@ -72,3 +72,17 @@ for vacat in vacation_data:
 
     add_vacation = crud.create_vacation(location_name, vac_start_date, vac_end_date)
     demise_in_db.append(add_vacation)
+
+   
+  # Load festival data from JSON file
+with open("test_data/festivals.json") as f:
+    festival_data = json.loads(f.read())
+
+    festival_in_db = []
+for fest in festival_data:
+    festive_name = (fest["festive_name"])
+    overview = (fest["overview"])
+    festive_date = datetime.strptime(fest["festive_date"],"%Y-%m-%d" )
+
+    add_festival = crud.create_festivals(festive_name, overview, festive_date)
+    festival_in_db.append(add_festival)
