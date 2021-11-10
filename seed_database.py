@@ -60,4 +60,15 @@ for wed in wedlock_data:
     demise_in_db.append(add_wedlock)
  
    
-  
+  # Load vacation data from JSON file
+with open("test_data/vacation.json") as f:
+    vacation_data = json.loads(f.read())
+
+    vacation_in_db = []
+for vacat in vacation_data:
+    location_name = (vacat["location_name"])
+    vac_start_date = datetime.strptime(vacat["vac_start_date"],"%Y-%m-%d" )
+    vac_end_date = datetime.strptime(vacat["vac_end_date"],"%Y-%m-%d" )
+
+    add_vacation = crud.create_vacation(location_name, vac_start_date, vac_end_date)
+    demise_in_db.append(add_vacation)
