@@ -13,6 +13,7 @@ os.system("createdb events")
 model.connect_to_db(server.app)
 model.db.create_all()
 
+
 # Load birthday data from JSON file
 with open("test_data/birthday.json") as f:
     birthday_data = json.loads(f.read())

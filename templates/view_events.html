@@ -3,8 +3,6 @@
 
 {% block title %}view the details of Event{% endblock %}
 
-   
-
 <ul>
   <li><a href = "/birthday">View all birthdays</a></li>
     
@@ -31,8 +29,6 @@
 </ul>
 
 
-
-
 <ul>
   <li><a href = "/addbirthday">Add birthdays</a></li>
     
@@ -54,31 +50,34 @@
 </ul>
 
 <ul>
-  <li><a href = "/addfestival">Add festive details</a></li>
+  <li><a href = "/addfestivals">Add festive details</a></li>
     
 </ul>
 
+<button name="bdaybutton" value="OK" type="button" onclick="clickfunbday()">check upcoming birthdays</button> 
+ 
+<button name="ddaybutton" value="OK" type="button" onclick="clickfundday()">check upcoming remembrance days</button> 
 
+<button name="vdaybutton" value="OK" type="button" onclick="clickfunvday()">check upcoming Vacations</button> 
 
+<button name="fdaybutton" value="OK" type="button" onclick="clickfunfday()">check upcoming Festivals</button> 
 
+<button name="wdaybutton" value="OK" type="button" onclick="clickfunwday()">check upcoming weddings</button> 
 
-<button name="button" value="OK" type="button" onclick="clickfun()">check upcoming birthdays</button> 
-
-
-<table>
-  <caption>Upcoming Events Table</caption>
+ <table>
+  <!-- <caption>Upcoming Events Table</caption> -->
   <thead>
     <tr>
       <th>Name</th>
-      <th>Birthday</th>
+      <th>Date</th>
     </tr>
   </thead>
   <tbody id="tBody"></tbody>
-</table>
+</table> 
 
 
 <script>  
-function clickfun() {
+function clickfunbday() {
     $.ajax({
       url: 'upcomingbday',
       type: 'GET',
@@ -87,7 +86,7 @@ function clickfun() {
         },
       success: function (response) {
         console.log(response)
-        for (const[key,value] of Object.entries(response)) //
+        for (const[key,value] of Object.entries(response)) 
         {
           console.log(key);
           console.log(value)
@@ -98,8 +97,104 @@ function clickfun() {
         },
     })
   }
-
 </script>  
+
+<script>  
+  function clickfundday() {
+      $.ajax({
+        url: 'upcomingdday',
+        type: 'GET',
+         headers:  { 
+          "contentType": 'application/json',
+          },
+        success: function (response) {
+          console.log(response)
+          for (const[key,value] of Object.entries(response)) 
+          {
+            console.log(key);
+            console.log(value)
+            $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
+            alert(`${key}:${value}`)  
+          }  
+                        
+          },
+      })
+    }
+  </script> 
+
+
+<script>  
+  function clickfunvday() {
+      $.ajax({
+        url: 'upcomingvday',
+        type: 'GET',
+         headers:  { 
+          "contentType": 'application/json',
+          },
+        success: function (response) {
+          console.log(response)
+          for (const[key,value] of Object.entries(response)) 
+          {
+            console.log(key);
+            console.log(value)
+            $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
+            alert(`${key}:${value}`)  
+          }  
+                        
+          },
+      })
+    }
+  </script> 
+
+
+<script>  
+  function clickfunfday() {
+      $.ajax({
+        url: 'upcomingfday',
+        type: 'GET',
+         headers:  { 
+          "contentType": 'application/json',
+          },
+        success: function (response) {
+          console.log(response)
+          for (const[key,value] of Object.entries(response)) 
+          {
+            console.log(key);
+            console.log(value)
+            $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
+            alert(`${key}:${value}`)  
+          }  
+                        
+          },
+      })
+    }
+  </script> 
+
+
+<script>  
+  function clickfunwday() {
+      $.ajax({
+        url: 'upcomingwday',
+        type: 'GET',
+         headers:  { 
+          "contentType": 'application/json',
+          },
+        success: function (response) {
+          console.log(response)
+          for (const[key,value] of Object.entries(response)) 
+          {
+            // // console.log(key);
+            // console.log(value1);
+            // console.log(value2);
+            $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
+            // $("#tBody").append(`<tr><td>${key}</td><td>${value[2]}</td></tr>`)
+            alert(`${key}:${value[1]}:${value[2]}`)  
+          }  
+                        
+          },
+      })
+    }
+  </script> 
 
 {%endblock%}
 

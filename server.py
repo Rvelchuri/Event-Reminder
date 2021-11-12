@@ -8,6 +8,7 @@ import crud
 from datetime import datetime, date, timedelta
 
 
+
 from jinja2 import StrictUndefined
 
 upcoming_days=14
@@ -110,6 +111,15 @@ def all_vacations():
     return render_template("vacation_display.html", vacation = vac_get)
 
 
+@app.route('/festivals')
+def all_festivals():
+    """view all festivals or important days list"""
+    fest_get = crud.get_festival()
+    print(fest_get)
+    print("******************")
+    return render_template("festivals_display.html", festival = fest_get)
+
+
 @app.route('/addbirthday', methods=["GET","POST"])
 def add_birthday():
     """Add birthday"""
@@ -137,12 +147,11 @@ def add_demise():
         name = request.form.get('name')
         gender = request.form.get('gender')
         relation= request.form.get('relation')
-        phone_number = request.form.get('phone_number')
         demise_date = datetime.strptime(request.form.get("demise_date"),"%Y-%m-%d" )
 
-        crud.create_birthday(name, gender,relation,phone_number,demise_date)
-        flash("You've successfully added birthday details")
-    return render_template("add_birthday.html")
+        crud.create_demise(name, gender,relation,demise_date)
+        flash("You've successfully added remembrance day details")
+    return render_template("add_demise.html")
 
 
 @app.route('/addwedding', methods=["GET","POST"])
@@ -166,10 +175,68 @@ def add_wedlock():
 
 
 
+@app.route('/addvacation', methods=["GET","POST"])
+def add_vacation():
+    """Add vacation"""
+    if request.method == "POST":
+
+        location_name= request.form.get('location_name')
+        vac_start_date = datetime.strptime(request.form.get("vac_start_date"),"%Y-%m-%d" )
+        vac_end_date = datetime.strptime(request.form.get("vac_end_date"),"%Y-%m-%d" )
+
+        crud.create_vacation(location_name, vac_start_date, vac_end_date)
+        # print(new_vacation)
+        flash("You've successfully added vacation details")
+    return render_template("add_vacation.html")
+
+
+
+
+@app.route('/addfestivals', methods=["GET","POST"])
+def add_festival():
+    """Add festival"""
+    if request.method == "POST":
+
+        festive_name= request.form.get('festive_name')
+        overview = request.form.get('overview')
+        festive_date = datetime.strptime(request.form.get("festive_date"),"%Y-%m-%d" )
+
+        crud.create_festivals(festive_name, overview, festive_date)
+        flash("You've successfully added festival details")
+    return render_template("add_festivals.html")
+
+
+
+
 @app.route('/upcomingbday')
 def get_upcoming_birthday():
     birthday_dic = crud.get_upcoming_birthday()
-    return jsonify (birthday_dic)
+    return jsonify (birthday_dic)  
+
+
+
+@app.route('/upcomingdday')
+def get_upcoming_demise_day():
+    death_dic = crud.get_upcoming_demise()
+    return jsonify (death_dic) 
+
+@app.route('/upcomingvday')
+def get_upcoming_vacation_day():
+    vacat_dic = crud.get_upcoming_vacations()
+    return jsonify (vacat_dic)
+
+
+@app.route('/upcomingfday')
+def get_upcoming_festivals_day():
+    fest_dic = crud.get_upcoming_festivals()
+    return jsonify (fest_dic)
+
+
+
+@app.route('/upcomingwday')
+def get_upcoming_wedding_day():
+    wedd_dic = crud.get_upcoming_weddings()
+    return jsonify (wedd_dic)
 
 
 

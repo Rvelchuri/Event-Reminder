@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
-{% block title %}All Birthdays{% endblock %}
+{% block title %}All Festivals{% endblock %}
 
 {% block body %}
-  <h1>All birthdays</h1>
+  <h1>All festivals or important days</h1>
 
   <ul>
-    {% for birth in birthday %}
+    {% for fest in festival %}
       <li>
         
-          {{birth.name }},
-          {{birth.gender}},
-          {{birth.relation}} ,
-          {{birth.email}}, 
-          {{birth.phone_number}},
-          {{birth.birth_date}}
+          {{fest.festive_name }},
+          {{fest.overview}},
+          {{fest.festive_date}}
+   
      
       </li>
     {% endfor %}

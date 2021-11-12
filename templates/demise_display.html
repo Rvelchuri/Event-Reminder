@@ -8,7 +8,11 @@
     {% for dem in demise %}
       <li>
         
-          {{dem}}
+          {{dem.name}},
+          {{dem.gender}},
+          {{dem.relation}},
+          {{dem.demise_date}}
+
       </li>
     {% endfor %}
   </ul>
