@@ -130,73 +130,87 @@ def get_festival():
 
 def get_upcoming_birthday():
     birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
-    birthdate_dict = {}
+    birthdate_list = []
     for bday in birthdate:
+        birthdate_dict = {}
         day = bday[0]
         day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
         now = datetime.now()
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
             birthdate_dict[bday[1]] = bday[0]
-    return birthdate_dict
+            birthdate_list.append(birthdate_dict)
+    return birthdate_list
 
 ##############################################################################################
 
 def get_upcoming_demise():
     death = db.session.query(Demise.demise_date,Demise.name).all()
-    death_dict = {}
+    death_list = []
     for dday in death:
+        death_dict = {}
         day = dday[0]
         day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
         now = datetime.now()
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
             death_dict[dday[1]] = dday[0]
-    return death_dict
+            death_list.append(death_dict)
+    return death_list
 
 ###################################
 
 
 def get_upcoming_vacations():
     vacat = db.session.query(Vacation.vac_start_date,Vacation.location_name).all()
-    vacat_dict = {}
+    vacat_list = []
     for vday in vacat:
+        vacat_dict = {}
         day = vday[0]
         day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
         now = datetime.now()
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
             vacat_dict[vday[1]] = vday[0]
-    return vacat_dict
+            vacat_list.append(vacat_dict)
+    return vacat_list
 
 
 
 def get_upcoming_festivals():
     fest = db.session.query(Festivals.festive_date,Festivals.festive_name).all()
-    fest_dict = {}
+    fest_list = []
     for fday in fest:
+        fest_dict = {}
         day = fday[0]
         day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
         now = datetime.now()
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
             fest_dict[fday[1]] = fday[0]
-    return fest_dict
+            fest_list.append(fest_dict)
+    return fest_list
 
 
 
 def get_upcoming_weddings():
     wedd = db.session.query(Wedlock.wedding_date,Wedlock.mr_name,Wedlock.mrs_name).all()
-    wedd_dict = {}
+    wedd_list = []
     for wday in wedd:
+        wedd_dict = {}
         day = wday[0]
         day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
         now = datetime.now()
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
-            wedd_dict[wday[1]] = wday[0]
-            wedd_dict[wday[2]] = wday[0]
-    return wedd_dict
+            # wedd_dict[wday[1]] = wday[0]
+            # wedd_dict[wday[2]] = wday[0]
+            wedd_dict["mr_name"] = wday[1]
+            wedd_dict["mrs_name"] = wday[2]
+            wedd_dict["wedding_date"] = wday[0]
+
+            wedd_list.append(wedd_dict)
+    return wedd_list
 
 
 

@@ -299,8 +299,8 @@ COPY public.birthdays (birth_id, email, name, gender, relation, phone_number, bi
 1	Aradhya@user.com	Aradhya cherukumalli	Female	Daughter	000-000-0000	2013-01-21 00:00:00	\N
 2	Arya@user.com	Arya cherukumalli	male	Son	000-000-0000	2013-01-21 00:00:00	\N
 3	Anika@user.com	Anika Paruchuri	female	niece	000-000-0000	2013-01-28 00:00:00	\N
-4	abc@abc.com	abc	abc	abc	923874384	1980-12-13 00:00:00	\N
-5	def@def.com	def	def	self	7634639637	2010-10-10 00:00:00	\N
+4	Sameera2@user.com	sameera	female	friend	72644862451	2000-11-29 00:00:00	\N
+6	Sameera@user.com	sam	female	friend	7324063344	2000-11-29 00:00:00	\N
 \.
 
 
@@ -313,6 +313,7 @@ COPY public.demise (demise_id, name, gender, relation, demise_date, user_id) FRO
 2	Subbu velchuri	male	grandfather	2012-04-23 00:00:00	\N
 3	Anitha chennupati	female	friend	2011-03-22 00:00:00	\N
 4	Lalitha K	female	cousin	2001-03-25 00:00:00	\N
+5	naayanamma	female	grandmother	2021-11-20 00:00:00	\N
 \.
 
 
@@ -321,6 +322,9 @@ COPY public.demise (demise_id, name, gender, relation, demise_date, user_id) FRO
 --
 
 COPY public.festivals (festive_id, festive_name, overview, festive_date, user_id) FROM stdin;
+1	Diwali	Making sweets, litting Diya and fireworks...super fun filled festival	2021-11-04 00:00:00	\N
+2	sankranthi	Making pongal, litting Diya and kite flying, wearing new clothes, doing bogi mantalu and a fun filled festival	2022-01-14 00:00:00	\N
+3	christmas	jesus birthday...	2021-12-25 00:00:00	\N
 \.
 
 
@@ -329,8 +333,8 @@ COPY public.festivals (festive_id, festive_name, overview, festive_date, user_id
 --
 
 COPY public.users (user_id, email, password) FROM stdin;
-1	rajani1@test.com	test
-2	suri@test.com	test
+1	rajani@test.com	test
+3	rajani1@test.com	test
 \.
 
 
@@ -341,6 +345,7 @@ COPY public.users (user_id, email, password) FROM stdin;
 COPY public.vacation (vac_id, location_name, vac_start_date, vac_end_date, user_id) FROM stdin;
 1	Houston,Texas	2021-11-05 00:00:00	2021-11-08 00:00:00	\N
 2	Guntur,India	2021-12-18 00:00:00	2022-01-10 00:00:00	\N
+3	hyderabad	2021-12-05 00:00:00	2022-08-08 00:00:00	\N
 \.
 
 
@@ -352,6 +357,7 @@ COPY public.wedding (wedding_id, mr_name, mrs_name, mr_email, mrs_email, "mr_Pho
 1	Suresh cherukumalli	Rajani Velchuri	suresh@user.com	rajani@gmail.com	732-406-2223	732-814-7184	2005-02-17 00:00:00	spouse	\N
 2	Ram velchuri	Madhavi battineni	ram@user.com	madhavi@gmail.com	732-406-2224	732-814-7174	2006-08-05 00:00:00	brother	\N
 3	prasad paruchuri	Neeraja Meka	ram@gmail.com	neeraja@user.com	763-604-2224	763-814-7174	2002-09-24 00:00:00	friend	\N
+4	venky	lakshmi	venky@user.com	lakshmi@user.com	8019935007	8019935006	1973-11-28 00:00:00	parents	\N
 \.
 
 
@@ -359,42 +365,42 @@ COPY public.wedding (wedding_id, mr_name, mrs_name, mr_email, mrs_email, "mr_Pho
 -- Name: birthdays_birth_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rajani
 --
 
-SELECT pg_catalog.setval('public.birthdays_birth_id_seq', 5, true);
+SELECT pg_catalog.setval('public.birthdays_birth_id_seq', 6, true);
 
 
 --
 -- Name: demise_demise_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rajani
 --
 
-SELECT pg_catalog.setval('public.demise_demise_id_seq', 4, true);
+SELECT pg_catalog.setval('public.demise_demise_id_seq', 5, true);
 
 
 --
 -- Name: festivals_festive_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rajani
 --
 
-SELECT pg_catalog.setval('public.festivals_festive_id_seq', 1, false);
+SELECT pg_catalog.setval('public.festivals_festive_id_seq', 3, true);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rajani
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 2, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 3, true);
 
 
 --
 -- Name: vacation_vac_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rajani
 --
 
-SELECT pg_catalog.setval('public.vacation_vac_id_seq', 2, true);
+SELECT pg_catalog.setval('public.vacation_vac_id_seq', 3, true);
 
 
 --
 -- Name: wedding_wedding_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rajani
 --
 
-SELECT pg_catalog.setval('public.wedding_wedding_id_seq', 3, true);
+SELECT pg_catalog.setval('public.wedding_wedding_id_seq', 4, true);
 
 
 --
