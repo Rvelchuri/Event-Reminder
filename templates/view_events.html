@@ -1,7 +1,28 @@
 {% extends 'base.html' %}
 {% block body %}
 
-{% block title %}view the details of Event{% endblock %}
+{% block title %}View/Addthe details of Event{% endblock %}
+
+
+<div class="modal hide" id="upcomingevents" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">    
+      <div class="modal-header">
+              <h3 class="modal-title">Upcoming Events</h3>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+              </button>
+  </div>
+  <div class="modal-body">
+  
+  
+  </div>
+  <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  </div>
+</div>
+</div>
+</div>
 
 <ul>
   <li><a href = "/birthday">View all birthdays</a></li>
@@ -64,8 +85,8 @@
 
 <button name="wdaybutton" value="OK" type="button" onclick="clickfunwday()">check upcoming weddings</button> 
 
- <table>
-  <!-- <caption>Upcoming Events Table</caption> -->
+ <!-- <table>
+  <caption>Upcoming Events Table</caption>
   <thead>
     <tr>
       <th>Name</th>
@@ -73,10 +94,28 @@
     </tr>
   </thead>
   <tbody id="tBody"></tbody>
-</table> 
+</table>  -->
 
 
 <script>  
+function sendmail(type,email) 
+ {
+    // var $row = $(this).closest("tr");    // Find the row
+    // var $text = $row.find(".rec_email").text(); // Find the text
+    
+    // Let's test it out
+    // alert($text);
+    console.log(type,email);
+    $.ajax({
+      url: 'sendmail',
+      type: 'POST',
+      data:JSON.stringify({'recipient':email,"type":type}), 
+      contentType: 'application/json;charset=UTF-8',
+      success:function (response){
+
+      }
+    })
+};
 function clickfunbday() {
     $.ajax({
       url: 'upcomingbday',
@@ -85,14 +124,25 @@ function clickfunbday() {
         "contentType": 'application/json',
         },
       success: function (response) {
-        console.log(response)
-        for (const[key,value] of Object.entries(response)) 
-        {
-          console.log(key);
-          console.log(value)
-          $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
-          alert(`${key}:${value}`)  
-        }  
+        data = response
+        var datalength = 1;
+        var html="";
+        html += '<table class="table table-bordered" >';
+            html+= `<tr><th>Name</th><th>Birth Date</th><th>E-mail</th><th>Phone Number</th><th>Action</th></tr>`
+        for(var count=0; count < response.length; count++){
+            html += '<tr>';
+            html += '<td>'+(data[count]["name"])+'</td>'; 
+            html += '<td>'+(data[count]["birth_date"])+'</td>'; 
+            html += '<td class="rec_email">'+(data[count]["email"])+'</td>'; 
+            html += '<td>'+(data[count]["phone_number"])+'</td>'; 
+            html += `<td><button type="button" class="use-address" onclick = sendmail('birthday',`+"'"+data[count]["email"]+"'"+")>send Email </td>";
+            html += '</tr>';
+        }
+        html += '</table>';      
+        
+        $('.modal-content .modal-body').empty().append(html) 
+       
+        $('#upcomingevents').modal('show'); 
                       
         },
     })
@@ -108,14 +158,24 @@ function clickfunbday() {
           "contentType": 'application/json',
           },
         success: function (response) {
-          console.log(response)
-          for (const[key,value] of Object.entries(response)) 
-          {
-            console.log(key);
-            console.log(value)
-            $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
-            alert(`${key}:${value}`)  
-          }  
+          data = response
+        var datalength = 1;
+        var html="";
+        html += '<table class="table table-bordered" >';
+            html+= `<tr><th>Name</th><th>Date</th></tr>`
+        for(var count=0; count < response.length; count++){
+            html += '<tr>';
+            html += '<td>'+Object.keys(data[count])[0]+'</td>'; 
+            html += '<td>'+Object.values(data[count])[0]+'</td>';
+            html += '<td>'+Object.values(data[count])[1]+'</td>'; 
+
+            html += '</tr>';
+        }
+        html += '</table>';      
+        
+        $('.modal-content .modal-body').empty().append(html) 
+       
+        $('#upcomingevents').modal('show'); 
                         
           },
       })
@@ -133,13 +193,23 @@ function clickfunbday() {
           },
         success: function (response) {
           console.log(response)
-          for (const[key,value] of Object.entries(response)) 
-          {
-            console.log(key);
-            console.log(value)
-            $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
-            alert(`${key}:${value}`)  
-          }  
+          data = response
+        var datalength = 1;
+        var html="";
+        html += '<table class="table table-bordered" >';
+            html+= `<tr><th>Name</th><th>Date</th></tr>`
+        for(var count=0; count < response.length; count++){
+            html += '<tr>';
+            html += '<td>'+Object.keys(data[count])[0]+'</td>'; 
+            html += '<td>'+Object.values(data[count])[0]+'</td>'; 
+
+            html += '</tr>';
+        }
+        html += '</table>';      
+        
+        $('.modal-content .modal-body').empty().append(html) 
+       
+        $('#upcomingevents').modal('show'); 
                         
           },
       })
@@ -156,14 +226,24 @@ function clickfunbday() {
           "contentType": 'application/json',
           },
         success: function (response) {
-          console.log(response)
-          for (const[key,value] of Object.entries(response)) 
-          {
-            console.log(key);
-            console.log(value)
-            $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
-            alert(`${key}:${value}`)  
-          }  
+          data = response
+        var datalength = 1;
+        var html="";
+        html += '<table class="table table-bordered" >';
+            html+= `<tr><th>Name</th><th>Date</th></tr>`
+        for(var count=0; count < response.length; count++){
+            html += '<tr>';
+            html += '<td>'+Object.keys(data[count])[0]+'</td>'; 
+            html += '<td>'+Object.values(data[count])[0]+'</td>'; 
+
+            html += '</tr>';
+        }
+        html += '</table>';      
+        
+        $('.modal-content .modal-body').empty().append(html) 
+       
+        $('#upcomingevents').modal('show'); 
+                        
                         
           },
       })
@@ -180,16 +260,31 @@ function clickfunbday() {
           "contentType": 'application/json',
           },
         success: function (response) {
-          console.log(response)
-          for (const[key,value] of Object.entries(response)) 
-          {
-            // // console.log(key);
-            // console.log(value1);
-            // console.log(value2);
-            $("#tBody").append(`<tr><td>${key}</td><td>${value}</td></tr>`)
-            // $("#tBody").append(`<tr><td>${key}</td><td>${value[2]}</td></tr>`)
-            alert(`${key}:${value[1]}:${value[2]}`)  
-          }  
+          data = response
+        var datalength = 1;
+        var html="";
+        html += '<table class="table table-bordered" >';
+            html+= `<tr><th>Mr.Name</th><th>Mrs.Name</th><th>Date</th></tr>`
+        for(var count=0; count < response.length; count++){
+          console.log(data[count]);
+            html += '<tr>';
+            html += '<td>'+data[count]["mr_name"]+'</td>'; 
+            html += '<td>'+data[count]["mrs_name"]+'</td>'; 
+            html += '<td>'+data[count]["wedding_date"]+'</td>';
+
+            html += '</tr>';
+
+            // html += '<tr>';
+            // html += '<td>'+Object.keys(data[count])[1]+'</td>'; 
+            // html += '<td>'+Object.values(data[count])[1]+'</td>'; 
+
+            // html += '</tr>';
+        }
+        html += '</table>';      
+        
+        $('.modal-content .modal-body').empty().append(html) 
+       
+        $('#upcomingevents').modal('show'); 
                         
           },
       })
