@@ -6,8 +6,8 @@ from sqlalchemy.orm import relation
 from model import connect_to_db
 import crud
 from datetime import datetime, date, timedelta
-
-
+import os
+import pdb
 
 from jinja2 import StrictUndefined
 
@@ -17,6 +17,17 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined 
 
+from flask_mail import Mail, Message
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'top-secret!'
+app.config['MAIL_SERVER'] = 'smtp.sendgrid.net'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'apikey'
+app.config['MAIL_PASSWORD'] = "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"
+app.config['MAIL_DEFAULT_SENDER'] = "rajani.velchuri@gmail.com"
+mail = Mail(app)
 
 
 @app.route('/')
@@ -239,21 +250,22 @@ def get_upcoming_wedding_day():
     return jsonify (wedd_dic)
 
 
-
-# @app.route('/upcomingbday')
-# def check_event_with_date():
-#     current_date = datetime.strptime (datetime.now(), "%Y-%m-%d" )
-#     # print(current_date)
-
-#     birthday_dates = crud.get_birthday_date()
-
-#     for bday in sorted(birthday_dates):
-#         if current_date == bday: 
-#             print(bday)
-
-#         else
-          
-
+#sending Email
+@app.route('/sendmail', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        pdb.set_trace()
+        print (request.data)
+        recipient = request.json['recipient']
+        msg = Message('Twilio SendGrid Test Email', recipients=[recipient])
+        msg.body = ('Congratulations! You have sent a test email with '
+                    'Twilio SendGrid!')
+        msg.html = ('<h1>Twilio SendGrid Test Email</h1>'
+                    '<p>Congratulations! You have sent a test email with '
+                    '<b>Twilio SendGrid</b>!</p>')
+        mail.send(msg)
+        flash(f'A test message was sent to {recipient}.')
+        return jsonify({"message":"success"})
 
     
     

@@ -129,7 +129,7 @@ def get_festival():
 
 
 def get_upcoming_birthday():
-    birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
+    birthdate = db.session.query(Birthday.birth_date,Birthday.name,Birthday.email,Birthday.phone_number).all()
     birthdate_list = []
     for bday in birthdate:
         birthdate_dict = {}
@@ -138,7 +138,11 @@ def get_upcoming_birthday():
         now = datetime.now()
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
-            birthdate_dict[bday[1]] = bday[0]
+            birthdate_dict["name"] = bday[1]
+            birthdate_dict["birth_date"] = bday[0]
+            birthdate_dict["email"] = bday[2]
+            birthdate_dict["phone_number"] = bday[3]
+
             birthdate_list.append(birthdate_dict)
     return birthdate_list
 
