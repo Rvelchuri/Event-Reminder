@@ -198,7 +198,7 @@ def add_vacation():
         vac_start_date = datetime.strptime(request.form.get("vac_start_date"),"%Y-%m-%d" )
         vac_end_date = datetime.strptime(request.form.get("vac_end_date"),"%Y-%m-%d" )
         if vac_end_date < vac_start_date:
-            alert(" please enter valid end date")
+            flash(" please enter valid end date")
         else:
             crud.create_vacation(location_name, vac_start_date, vac_end_date)
         # print(new_vacation)
