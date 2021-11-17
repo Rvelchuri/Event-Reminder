@@ -128,13 +128,13 @@ function clickfunbday() {
         var datalength = 1;
         var html="";
         html += '<table class="table table-bordered" >';
-            html+= `<tr><th>Name</th><th>Birth Date</th><th>E-mail</th><th>Phone Number</th><th>Action</th></tr>`
+            html+= `<tr><th>Name</th><th>Birth Date</th><th>E-mail</th><th>Action</th></tr>`
         for(var count=0; count < response.length; count++){
             html += '<tr>';
             html += '<td>'+(data[count]["name"])+'</td>'; 
             html += '<td>'+(data[count]["birth_date"])+'</td>'; 
             html += '<td class="rec_email">'+(data[count]["email"])+'</td>'; 
-            html += '<td>'+(data[count]["phone_number"])+'</td>'; 
+            // html += '<td>'+(data[count]["phone_number"])+'</td>'; 
             html += `<td><button type="button" class="use-address" onclick = sendmail('birthday',`+"'"+data[count]["email"]+"'"+")>send Email </td>";
             html += '</tr>';
         }
@@ -165,9 +165,9 @@ function clickfunbday() {
             html+= `<tr><th>Name</th><th>Date</th></tr>`
         for(var count=0; count < response.length; count++){
             html += '<tr>';
-            html += '<td>'+Object.keys(data[count])[0]+'</td>'; 
-            html += '<td>'+Object.values(data[count])[0]+'</td>';
-            html += '<td>'+Object.values(data[count])[1]+'</td>'; 
+            html += '<td>'+data[count]["name"]+'</td>'; 
+            html += '<td>'+data[count]["demise_date"]+'</td>';
+            // html += '<td>'+Object.values(data[count])[1]+'</td>'; 
 
             html += '</tr>';
         }
@@ -264,15 +264,19 @@ function clickfunbday() {
         var datalength = 1;
         var html="";
         html += '<table class="table table-bordered" >';
-            html+= `<tr><th>Mr.Name</th><th>Mrs.Name</th><th>Date</th></tr>`
+            html+= `<tr><th>Mr.Name</th><th>Mrs.Name</th><th>Date</th><th>Mr.Email</th><th>Mrs.Email</th></tr>`
         for(var count=0; count < response.length; count++){
           console.log(data[count]);
             html += '<tr>';
             html += '<td>'+data[count]["mr_name"]+'</td>'; 
             html += '<td>'+data[count]["mrs_name"]+'</td>'; 
             html += '<td>'+data[count]["wedding_date"]+'</td>';
-
+            html += '<td class="rec_email">'+(data[count]["mr_email"])+'</td>'; 
+            html += '<td class="rec_email">'+(data[count]["mrs_email"])+'</td>';
+            html += `<td><button type="button" class="use-address" onclick = sendmail('wedding',`+"'"+data[count]["mr_email"]+"'"+")>send Email to MR </td>";
+            html += `<td><button type="button" class="use-address" onclick = sendmail('wedding',`+"'"+data[count]["mrs_email"]+"'"+")>send Email to Mrs </td>";
             html += '</tr>';
+          
 
             // html += '<tr>';
             // html += '<td>'+Object.keys(data[count])[1]+'</td>'; 
