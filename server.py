@@ -47,11 +47,7 @@ def show_user(user_id):
     user =crud.get_user_by_id(user_id)
     return render_template("user_details.html", user=user)
 
-# #  route to events page
-# @app.route('/users/<user_id>')
-# def show_events(user_id):
-#     user =crud.get_event(user_id)
-#     return render_template("add_events.html", user=user)
+
 
 @app.route("/users", methods=["POST"])
 def register_user():
@@ -81,15 +77,22 @@ def log_in():
         flash('Logged in!')
     else:
        flash("Try again")
+    return redirect('/view_events')
+
+
+
+@app.route("/view_events", methods=["GET"])
+def view_events():
     return render_template('/view_events.html')
+
 
 
 
 @app.route('/birthday')
 def all_birthday():
     """view all birthdays"""
-    birthday = crud.get_birthday()
-    print(birthday)
+    birthday = crud.get_birthday(session["key"])
+    print(birthday)       
     print ("*******",type(birthday))
     return render_template("birthday_display.html", birthday = birthday)
 
@@ -98,7 +101,7 @@ def all_birthday():
 @app.route('/demise')
 def all_demise():
     """view all death Anniversaries"""
-    demis_get = crud.get_demise()
+    demis_get = crud.get_demise(session["key"])
     print(demis_get)
     print("******************")
     return render_template("demise_display.html", demise = demis_get)
@@ -108,7 +111,7 @@ def all_demise():
 @app.route('/wedding')
 def all_wedding():
     """view all wedding Anniversaries"""
-    wed_get = crud.get_wedlock()
+    wed_get = crud.get_wedlock(session["key"])
     print(wed_get)
     print("******************")
     return render_template("wedding_display.html", wedding= wed_get)
@@ -116,7 +119,7 @@ def all_wedding():
 @app.route('/vacation')
 def all_vacations():
     """view all vacation list"""
-    vac_get = crud.get_vacation()
+    vac_get = crud.get_vacation(session["key"])
     print(vac_get)
     print("******************")
     return render_template("vacation_display.html", vacation = vac_get)
@@ -125,7 +128,7 @@ def all_vacations():
 @app.route('/festivals')
 def all_festivals():
     """view all festivals or important days list"""
-    fest_get = crud.get_festival()
+    fest_get = crud.get_festival(session["key"])
     print(fest_get)
     print("******************")
     return render_template("festivals_display.html", festival = fest_get)
@@ -221,14 +224,14 @@ def add_festival():
 
 @app.route('/upcomingbday')
 def get_upcoming_birthday():
-    birthday_dic = crud.get_upcoming_birthday()
+    birthday_dic = crud.get_upcoming_birthday(session["key"])
     return jsonify (birthday_dic)  
 
 
 
 @app.route('/upcomingdday')
 def get_upcoming_demise_day():
-    death_dic = crud.get_upcoming_demise()
+    death_dic = crud.get_upcoming_demise(session["key"])
     return jsonify (death_dic) 
 
 @app.route('/upcomingvday')
