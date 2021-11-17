@@ -197,10 +197,12 @@ def add_vacation():
         location_name= request.form.get('location_name')
         vac_start_date = datetime.strptime(request.form.get("vac_start_date"),"%Y-%m-%d" )
         vac_end_date = datetime.strptime(request.form.get("vac_end_date"),"%Y-%m-%d" )
-
-        crud.create_vacation(location_name, vac_start_date, vac_end_date)
+        if vac_end_date < vac_start_date:
+            alert(" please enter valid end date")
+        else:
+            crud.create_vacation(location_name, vac_start_date, vac_end_date)
         # print(new_vacation)
-        flash("You've successfully added vacation details")
+            flash("You've successfully added vacation details")
     return render_template("add_vacation.html")
 
 
@@ -236,20 +238,20 @@ def get_upcoming_demise_day():
 
 @app.route('/upcomingvday')
 def get_upcoming_vacation_day():
-    vacat_dic = crud.get_upcoming_vacations()
+    vacat_dic = crud.get_upcoming_vacations(session["key"])
     return jsonify (vacat_dic)
 
 
 @app.route('/upcomingfday')
 def get_upcoming_festivals_day():
-    fest_dic = crud.get_upcoming_festivals()
+    fest_dic = crud.get_upcoming_festivals(session["key"])
     return jsonify (fest_dic)
 
 
 
 @app.route('/upcomingwday')
 def get_upcoming_wedding_day():
-    wedd_dic = crud.get_upcoming_weddings()
+    wedd_dic = crud.get_upcoming_weddings(session["key"])
     return jsonify (wedd_dic)
 
 
