@@ -4,6 +4,7 @@
 {% block title %}View/Addthe details of Event{% endblock %}
 
 
+
 <div class="modal hide" id="upcomingevents" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">    
@@ -50,10 +51,10 @@
 </ul>
 
 
-<ul>
+<!-- <ul>
   <li><a href = "/addbirthday">Add birthdays</a></li>
     
-</ul>
+</ul> -->
 
 <ul>
   <li><a href = "/adddemise">Add death details </a></li>
@@ -85,16 +86,9 @@
 
 <button name="wdaybutton" value="OK" type="button" onclick="clickfunwday()">check upcoming weddings</button> 
 
- <!-- <table>
-  <caption>Upcoming Events Table</caption>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-  <tbody id="tBody"></tbody>
-</table>  -->
+
+<button name="bdaybutton" value="OK" type="button" onclick="clickallevents()">check all upcoming Events</button>
+
 
 
 <script>  
@@ -113,7 +107,11 @@ function sendmail(type,email)
       contentType: 'application/json;charset=UTF-8',
       success:function (response){
 
-      }
+      },
+          error: function(data, errorThrown)
+          {
+              alert('request failed :'+errorThrown);
+          }
     })
 };
 function clickfunbday() {
@@ -128,14 +126,15 @@ function clickfunbday() {
         var datalength = 1;
         var html="";
         html += '<table class="table table-bordered" >';
-            html+= `<tr><th>Name</th><th>Birth Date</th><th>E-mail</th><th>Action</th></tr>`
+            html+= `<tr><th>Name</th><th>Birth Date</th><th>E-mail</th><th>Action</th><th>Message</th></tr>`
         for(var count=0; count < response.length; count++){
             html += '<tr>';
             html += '<td>'+(data[count]["name"])+'</td>'; 
             html += '<td>'+(data[count]["birth_date"])+'</td>'; 
             html += '<td class="rec_email">'+(data[count]["email"])+'</td>'; 
-            // html += '<td>'+(data[count]["phone_number"])+'</td>'; 
+            
             html += `<td><button type="button" class="use-address" onclick = sendmail('birthday',`+"'"+data[count]["email"]+"'"+")>send Email </td>";
+            html += '<td>'+(data[count]["message"])+'</td>';   
             html += '</tr>';
         }
         html += '</table>';      
@@ -197,11 +196,13 @@ function clickfunbday() {
         var datalength = 1;
         var html="";
         html += '<table class="table table-bordered" >';
-            html+= `<tr><th>Name</th><th>Date</th></tr>`
+            html+= `<tr><th>Name</th><th>Date</th><th>Type</th></tr>`
+
         for(var count=0; count < response.length; count++){
             html += '<tr>';
-            html += '<td>'+data[count]["location_name"]+'</td>'; 
-            html += '<td>'+data[count]["vac_start_date"]+'</td>';
+            html += '<td>'+data[count]["name"]+'</td>'; 
+            html += '<td>'+data[count]["date"]+'</td>';
+            html += '<td>'+data[count]["type"]+'</td>';
 
             html += '</tr>';
         }

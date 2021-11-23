@@ -2,55 +2,56 @@
 
 from sqlalchemy.orm import relation
 from model import db, User,Birthday,Demise,Wedlock,Vacation,Festivals, connect_to_db
-from datetime import datetime, timedelta, date
+from datetime import datetime, time, timedelta, date
 from flask import session
+import pdb
 
 # Functions start here! 
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
 
-def create_user(email, password):
+def create_user(email, password,name, phone_number):
     
     """Create and return a new user."""
 
-    user = User(email= email, password = password)
+    user = User(email= email, password = password,name = name, phone_number = phone_number)
 
     db.session.add(user)
     db.session.commit()
     return user
 
-def create_birthday(email, name, gender,relation,phone_number,birth_date):
-    birth = Birthday(email = email, name = name, gender = gender,relation = relation, phone_number = phone_number, birth_date = birth_date, user_id = session["key"])
+def create_birthday(email, name, gender,relation,phone_number,birth_date,user_id):
+    birth = Birthday(email = email, name = name, gender = gender,relation = relation, phone_number = phone_number, birth_date = birth_date, user_id = user_id)
     db.session.add(birth)
     db.session.commit()
     return birth
 
-def create_demise(name, gender,relation,demise_date):
-    remem = Demise(name = name, gender = gender,relation = relation, demise_date = demise_date,user_id = session["key"])
+def create_demise(name, gender,relation,demise_date,user_id):
+    remem = Demise(name = name, gender = gender,relation = relation, demise_date = demise_date,user_id = user_id)
 
     db.session.add(remem)
     db.session.commit()
     return remem
 
-def create_wedlock(mr_name,mrs_name,mr_email,mrs_email,mr_Phone_number,mrs_Phone_number,wedding_date,relation):
+def create_wedlock(mr_name,mrs_name,mr_email,mrs_email,mr_Phone_number,mrs_Phone_number,wedding_date,relation,user_id):
     weddi = Wedlock(mr_name = mr_name,mrs_name = mrs_name, mr_email= mr_email, mrs_email = mrs_email, 
     mr_Phone_number = mr_Phone_number, mrs_Phone_number = mrs_Phone_number, 
-    wedding_date = wedding_date, relation = relation ,user_id = session["key"])
+    wedding_date = wedding_date, relation = relation, user_id = user_id )
 
     db.session.add(weddi)
     db.session.commit()
     return weddi
 
-def create_vacation(location_name, vac_start_date, vac_end_date):
-    vacat = Vacation(location_name = location_name, vac_start_date = vac_start_date, vac_end_date = vac_end_date,user_id = session["key"])
+def create_vacation(location_name, vac_start_date, vac_end_date,user_id):
+    vacat = Vacation(location_name = location_name, vac_start_date = vac_start_date, vac_end_date = vac_end_date,user_id = user_id)
 
     db.session.add(vacat)
     db.session.commit()
     return vacat
 
-def create_festivals(festive_name, overview, festive_date):
-    festi = Festivals(festive_name = festive_name, overview = overview, festive_date = festive_date,user_id = session["key"])
+def create_festivals(festive_name, overview, festive_date, user_id):
+    festi = Festivals(festive_name = festive_name, overview = overview, festive_date = festive_date, user_id=user_id)
 
     db.session.add(festi)
     db.session.commit()
@@ -140,8 +141,18 @@ def get_user_by_id(user_id):
 def get_upcoming_birthday(user_id):
     # birthdate = db.session.query.(Birthday.birth_date,Birthday.name,Birthday.email,Birthday.phone_number,Birthday.user_id).all()
     birthdate = Birthday.query.filter(Birthday.user_id == user_id).all()
+    str_one = " let them eat cake ...its first birthday"
+    str_sixteen = "sweet sixteen... its 16th birthday"
+    str_eighteen = "let them vote....its 18th birthday"
+    str_thirty ="lets settle down.... its 30th birthday"
+    str_forty ="still young.... its 40th birthday"
+    str_fifty = "Growing old is mandatory... its 50th birthday"
+    str_sixty = "getting better everyday... its 60th birthday"
+    
+
     # print(birthdate)
     birthdate_list = []
+    
     for bday in birthdate:
         birthdate_dict = {}
         day = bday.birth_date
@@ -157,6 +168,26 @@ def get_upcoming_birthday(user_id):
             birthdate_dict["name"] = bday.name
             birthdate_dict["email"] = bday.email
             birthdate_dict["birth_date"] = bday.birth_date
+            # birthdate_list.append(birthdate_dict)
+            pdb.set_trace()
+            year = timedelta(days=365)
+            special = int((now-day)/year)
+            print(special)
+            if special <=1:
+               birthdate_dict["message"] = str_one
+            elif special <=16:
+               birthdate_dict["message"] = str_sixteen
+            elif special <=18:
+               birthdate_dict["message"] = str_eighteen
+            elif special <=30:
+               birthdate_dict["message"] = str_thirty
+            elif special <=40:
+               birthdate_dict["message"] = str_forty
+            elif special <=50:
+               birthdate_dict["message"] = str_fifty
+            elif special <=60:
+               birthdate_dict["message"] = str_sixty
+          
             birthdate_list.append(birthdate_dict)
             print(birthdate_list)
     return birthdate_list
@@ -175,18 +206,26 @@ def get_upcoming_demise(user_id):
         # month = int(month)
         # day = int(day)
         now = datetime.now()
+
         if now.month in [10,11,12] and day.month in [1,2,3]:
             day_this_year = datetime(year=datetime.now().year+1, month=day.month, day=day.day)
         
         else:
             day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
+            print(day_this_year)
        
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
             death_dict["name"] = dday.name
-            death_dict["demise_date"] = dday.demise_date
+            death_dict["date"] = dday.demise_date
+            death_dict["type"] = "demise"
+            # death_dict["special bday"] = 
             death_list.append(death_dict)
+
+
             print(death_list)
+            
+
     return death_list
 
 ###################################
@@ -209,9 +248,11 @@ def get_upcoming_vacations(user_id):
       
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
-            vacat_dict["location_name"] = vday.location_name
-            vacat_dict["vac_start_date"] = vday.vac_start_date
+            vacat_dict["name"] = vday.location_name
+            vacat_dict["date"] = vday.vac_start_date
+            vacat_dict["type"] = "vacation"
             vacat_list.append(vacat_dict)
+       
     return vacat_list
 
 
@@ -231,8 +272,9 @@ def get_upcoming_festivals(user_id):
             day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
-            fest_dict["festive_name"] = fday.festive_name
-            fest_dict["festive_date"] = fday.festive_date
+            fest_dict["name"] = fday.festive_name
+            fest_dict["date"] = fday.festive_date
+            fest_dict["type"] = "festival"
 
             fest_list.append(fest_dict)
     return fest_list
@@ -272,24 +314,6 @@ def get_upcoming_weddings(user_id):
 
 
 
-# def get_upcoming_birthday(user_id):
-#     # birthdate = db.session.query.(Birthday.birth_date,Birthday.name,Birthday.email,Birthday.phone_number,Birthday.user_id).all()
-#     birthdate = Birthday.query.filter(Birthday.user_id == user_id).all()
-#     print(birthdate)
-#     birthdate_list = []
-#     for bday in birthdate:
-#         birthdate_dict = {}
-#         day = bday[0]
-#         day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
-#         now = datetime.now()
-#         nextday_date = datetime.now() + timedelta(days=90)
-#         if day_this_year > now and day_this_year < nextday_date:
-#             birthdate_dict["name"] = bday[1]
-#             birthdate_dict["email"] = bday[0]
-#             birthdate_dict["email"] = bday[2]
-#             birthdate_dict["phone_number"] = bday[3]
 
-#             birthdate_list.append(birthdate_dict)
-#     return birthdate_list
 
 

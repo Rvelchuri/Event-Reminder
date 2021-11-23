@@ -6,7 +6,8 @@
     "gender": "Female",
     "relation": "Daughter",
     "phone_number": "000-000-0000",
-    "birth_date": "2013-01-21"    
+    "birth_date": "2013-01-21" ,
+    "user_id": 1   
   },
 
   {

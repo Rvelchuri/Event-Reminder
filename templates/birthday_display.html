@@ -1,9 +1,72 @@
+
 {% extends 'base.html' %}
+
 {% block title %}All Birthdays{% endblock %}
 
 {% block body %}
 
-  <h1>All birthdays</h1>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+      }
+      .bg {
+        background-image: url('/static/img/happy-birthday.jpeg');
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+  </body>
+</html> -->
+
+  
+    <style>
+      body {
+        
+        background-image: url('/static/img/happy-birthday.jpeg');
+        height: 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+      }
+    </style>
+  
+  <body>
+  </body>
+
+
+
+<div class="modal hide" id="upcomingevents" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">    
+      <div class="modal-header">
+              <h3 class="modal-title">Upcoming Events</h3>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+              </button>
+  </div>
+  <div class="modal-body">
+  
+  
+  </div>
+  <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  </div>
+</div>
+</div>
+</div>
+<button name="bdaybutton" value="OK" type="button" onclick="clickfunbday()">check upcoming birthdays</button> 
+<a href = "/addbirthday"> <button name="addbdaybutton" value="OK" type="button" >Add birthday</button>  </a>
+
+<h1>All birthdays</h1>
 
   <ul>
     {% for birth in birthday %}
@@ -14,9 +77,70 @@
           {{birth.relation}} ,
           {{birth.email}}, 
           {{birth.phone_number}},
-          {{birth.birth_date}}
+          {{birth.birth_date.date()}}
      
       </li>
     {% endfor %}
   </ul>
+  
+
+
+  <button name="bdaybutton" value="OK" type="button" onclick="clickfunbday()">check upcoming birthdays</button> 
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+  
+  <a href = "/addbirthday"> <button name="addbdaybutton" value="OK" type="button" >Add birthday</button>  </a>
+  
+
+<script>  
+  function sendmail(type,email) 
+   {
+      // var $row = $(this).closest("tr");    // Find the row
+      // var $text = $row.find(".rec_email").text(); // Find the text
+      
+      // Let's test it out
+      // alert($text);
+      console.log(type,email);
+      $.ajax({
+        url: 'sendmail',
+        type: 'POST',
+        data:JSON.stringify({'recipient':email,"type":type}), 
+        contentType: 'application/json;charset=UTF-8',
+        success:function (response){
+  
+        }
+      })
+  };
+
+function clickfunbday() {
+  $.ajax({
+    url: 'upcomingbday',
+    type: 'GET',
+     headers:  { 
+      "contentType": 'application/json',
+      },
+    success: function (response) {
+      data = response
+      var datalength = 1;
+      var html="";
+      html += '<table class="table table-bordered" >';
+          html+= `<tr><th>Name</th><th>Birth Date</th><th>E-mail</th><th>Action</th></tr>`
+      for(var count=0; count < response.length; count++){
+          html += '<tr>';
+          html += '<td>'+(data[count]["name"])+'</td>'; 
+          html += '<td>'+(data[count]["birth_date"])+'</td>'; 
+          html += '<td class="rec_email">'+(data[count]["email"])+'</td>'; 
+          // html += '<td>'+(data[count]["phone_number"])+'</td>'; 
+          html += `<td><button type="button" class="use-address" onclick = sendmail('birthday',`+"'"+data[count]["email"]+"'"+")>send Email </td>";
+          html += '</tr>';
+      }
+      html += '</table>';      
+      
+      $('.modal-content .modal-body').empty().append(html) 
+     
+      $('#upcomingevents').modal('show'); 
+                    
+      },
+  })
+}
+</script>  
 {% endblock %}

@@ -13,6 +13,8 @@ class User(db.Model):
     user_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    name = db.Column(db.String)
+    phone_number = db.Column(db.String)
     
     birthday = db.relationship('Birthday', back_populates ="user", uselist = False) 
     demise = db.relationship('Demise', back_populates ="user", uselist = False)
