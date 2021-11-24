@@ -1,5 +1,7 @@
 """CRUD operations."""
 
+import re
+from typing import List
 from sqlalchemy.orm import relation
 from model import db, User,Birthday,Demise,Wedlock,Vacation,Festivals, connect_to_db
 from datetime import datetime, time, timedelta, date
@@ -105,37 +107,6 @@ def get_festival(user_id):
 def get_user_by_id(user_id):
     return User.query.get(user_id)
 
-# def get_birthday_date():
-#     birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
-#     print(birthdate)
-#     birthdate_list = []
-#     birthname_list = []
-#     for bday in birthdate:
-        
-#         birthdate_list.append(bday.birth_date)
-#         birthname_list.append(bday.name)
-#         day = datetime.strptime(bday["birth_date"],"%Y-%m-%d" )
-
-#         print(birthdate_list)
-#         print(birthname_list)
-#         print(day)
-#     return (day,birthname_list)
-
-
-
-# def get_upcoming_birthday():
-#     birthdate = db.session.query(Birthday.birth_date,Birthday.name).all()
-#     print(birthdate)
-#     birthdate_dict = {}
-#     for bday in birthdate:
-#         day = bday["birth_date"]
-#         now = datetime.now()
-#         nextday_date = datetime.today() + timedelta(days=30)
-#         if day > now and day < nextday_date:
-#             birthdate_dict[bday["name"]] = bday["birth_date"]
-
-#             print (birthdate_dict)
-#     return birthdate_dict
 
 
 def get_upcoming_birthday(user_id):
@@ -166,10 +137,12 @@ def get_upcoming_birthday(user_id):
         nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
             birthdate_dict["name"] = bday.name
+            birthdate_dict["date"] = bday.birth_date
             birthdate_dict["email"] = bday.email
-            birthdate_dict["birth_date"] = bday.birth_date
+            birthdate_dict["type"] = "birthday"
+           
             # birthdate_list.append(birthdate_dict)
-            pdb.set_trace()
+            # pdb.set_trace()
             year = timedelta(days=365)
             special = int((now-day)/year)
             print(special)
@@ -218,6 +191,7 @@ def get_upcoming_demise(user_id):
         if day_this_year > now and day_this_year < nextday_date:
             death_dict["name"] = dday.name
             death_dict["date"] = dday.demise_date
+            death_dict["email"] = ""
             death_dict["type"] = "demise"
             # death_dict["special bday"] = 
             death_list.append(death_dict)
@@ -250,6 +224,7 @@ def get_upcoming_vacations(user_id):
         if day_this_year > now and day_this_year < nextday_date:
             vacat_dict["name"] = vday.location_name
             vacat_dict["date"] = vday.vac_start_date
+            vacat_dict["email"] = ""
             vacat_dict["type"] = "vacation"
             vacat_list.append(vacat_dict)
        
@@ -274,6 +249,7 @@ def get_upcoming_festivals(user_id):
         if day_this_year > now and day_this_year < nextday_date:
             fest_dict["name"] = fday.festive_name
             fest_dict["date"] = fday.festive_date
+            fest_dict["email"] = ""
             fest_dict["type"] = "festival"
 
             fest_list.append(fest_dict)
@@ -300,14 +276,17 @@ def get_upcoming_weddings(user_id):
         if day_this_year > now and day_this_year < nextday_date:
             # wedd_dict[wday[1]] = wday[0]
             # wedd_dict[wday[2]] = wday[0]
-            wedd_dict["mr_name"] = wday.mr_name
-            wedd_dict["mrs_name"] = wday.mrs_name
-            wedd_dict["wedding_date"] = wday.wedding_date
-            wedd_dict["mr_email"] = wday.mr_email
-            wedd_dict["mrs_email"] = wday.mrs_email
+            wedd_dict["name"] = wday.mr_name + " weds " + wday.mrs_name
+            # wedd_dict["mrs_name"] = wday.mrs_name
+            wedd_dict["date"] = wday.wedding_date
+            wedd_dict["email"] = wday.mr_email
+            # wedd_dict["mrs_email"] = wday.mrs_email
+            wedd_dict["type"] = "wedding"
 
             wedd_list.append(wedd_dict)
+        
     return wedd_list
+    # return List[{wedd_list,wedding_list}]
 
 
 
