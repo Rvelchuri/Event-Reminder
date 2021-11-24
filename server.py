@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined 
 
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'top-secret!'
@@ -27,7 +27,7 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'apikey'
 app.config['MAIL_PASSWORD'] = os.environ.get('SENDGRID_API_KEY')
 app.config['MAIL_DEFAULT_SENDER'] = "rajani.velchuri@gmail.com"
-mail = Mail(app)
+# mail = Mail(app)
 
 
 @app.route('/')
@@ -81,10 +81,17 @@ def log_in():
     if user:
         key = user.user_id
         session['key'] = key
-        flash('Logged in!')
+        session['name'] = user.name
+        # flash('Logged in!')
     else:
        flash("Try again")
     return redirect('/view_events')
+
+@app.route("/logout")
+def log_out():
+    session["key"] = ""
+    return render_template("homepage.html")
+
 
 
 
@@ -142,7 +149,7 @@ def all_festivals():
     return render_template("festivals_display.html", festival = fest_get)
 
 
-@app.route('/navbirthday', methods=["GET","POST"])
+@app.route('/addbirthday', methods=["GET","POST"])
 def add_birthday():
     """Add birthday"""
     if request.method == "POST":
@@ -157,6 +164,7 @@ def add_birthday():
         new_birthday=crud.create_birthday(email, name, gender,relation,phone_number,birth_date,session['key'])
         print(new_birthday)
         flash("You've successfully added birthday details")
+    # return render_template("add_birthday.html")
     return redirect('/birthday')
 
 
@@ -170,35 +178,41 @@ def nav_birthday():
 @app.route('/adddemise', methods=["GET","POST"])
 def add_demise():
     """Add death day"""
-    if request.method == "POST":
+    try:
+        if request.method == "POST":
 
-        name = request.form.get('name')
-        gender = request.form.get('gender')
-        relation= request.form.get('relation')
-        demise_date = datetime.strptime(request.form.get("demise_date"),"%Y-%m-%d" )
+            name = request.form.get('name')
+            gender = request.form.get('gender')
+            relation= request.form.get('relation')
+            demise_date = datetime.strptime(request.form.get("demise_date"),"%Y-%m-%d" )
 
-        crud.create_demise(name, gender,relation,demise_date,session['key'])
-        flash("You've successfully added remembrance day details")
-    return render_template("add_demise.html")
+            crud.create_demise(name, gender,relation,demise_date,session['key'])
+            flash("You've successfully added remembrance day details")
+        return render_template("add_demise.html"),201
+    except Exception as e:
+        return jsonify({"message": "failed"}),400
 
 
 @app.route('/addwedding', methods=["GET","POST"])
 def add_wedlock():
     """Add wedding"""
-    if request.method == "POST":
-    
-        mr_name = request.form.get('mr_name')
-        mrs_name = request.form.get('mrs_name')
-        mr_email = request.form.get('mr_email')
-        mrs_email = request.form.get('mrs_email')
-        mr_Phone_number = request.form.get('mr_phone_number')
-        mrs_Phone_number = request.form.get('mrs_phone_number')
-        relation = request.form.get('relation')
-        wedding_date = datetime.strptime(request.form.get("wedding_date"),"%Y-%m-%d" )
+    try:
+        if request.method == "POST":
+        
+            mr_name = request.form.get('mr_name')
+            mrs_name = request.form.get('mrs_name')
+            mr_email = request.form.get('mr_email')
+            mrs_email = request.form.get('mrs_email')
+            mr_Phone_number = request.form.get('mr_phone_number')
+            mrs_Phone_number = request.form.get('mrs_phone_number')
+            relation = request.form.get('relation')
+            wedding_date = datetime.strptime(request.form.get("wedding_date"),"%Y-%m-%d" )
 
-        crud.create_wedlock(mr_name,mrs_name,mr_email,mrs_email,mr_Phone_number,mrs_Phone_number,wedding_date,relation,session['key'])
-        flash("You've successfully added wedding details")
-    return render_template("add_wedding.html")
+            crud.create_wedlock(mr_name,mrs_name,mr_email,mrs_email,mr_Phone_number,mrs_Phone_number,wedding_date,relation,session['key'])
+            flash("You've successfully added wedding details")
+        return render_template("add_wedding.html"),201
+    except Exception as e:
+        return jsonify({"message": "failed"}),400
 
 
 
@@ -206,18 +220,21 @@ def add_wedlock():
 @app.route('/addvacation', methods=["GET","POST"])
 def add_vacation():
     """Add vacation"""
-    if request.method == "POST":
+    try:
+        if request.method == "POST":
 
-        location_name= request.form.get('location_name')
-        vac_start_date = datetime.strptime(request.form.get("vac_start_date"),"%Y-%m-%d" )
-        vac_end_date = datetime.strptime(request.form.get("vac_end_date"),"%Y-%m-%d" )
-        if vac_end_date < vac_start_date:
-            flash(" please enter valid end date")
-        else:
-            crud.create_vacation(location_name, vac_start_date, vac_end_date,session['key'])
-        # print(new_vacation)
-            flash("You've successfully added vacation details")
-    return render_template("add_vacation.html")
+            location_name= request.form.get('location_name')
+            vac_start_date = datetime.strptime(request.form.get("vac_start_date"),"%Y-%m-%d" )
+            vac_end_date = datetime.strptime(request.form.get("vac_end_date"),"%Y-%m-%d" )
+            if vac_end_date < vac_start_date:
+                flash(" please enter valid end date")
+            else:
+                crud.create_vacation(location_name, vac_start_date, vac_end_date,session['key'])
+            # print(new_vacation)
+                flash("You've successfully added vacation details")
+        return render_template("add_vacation.html"),201
+    except Exception as e:
+        return jsonify({"message": "failed"}),400
 
 
 
@@ -266,8 +283,13 @@ def get_upcoming_vacation_day():
         vacat_dic = crud.get_upcoming_vacations(session["key"])
         death_dic = crud.get_upcoming_demise(session["key"])
         fest_dic = crud.get_upcoming_festivals(session["key"])
+        wedd_dic = crud.get_upcoming_weddings(session["key"])
+        birthday_dic = crud.get_upcoming_birthday(session["key"])
+        # pdb.set_trace()
         vacat_dic.extend(death_dic)
         vacat_dic.extend(fest_dic)
+        vacat_dic.extend(wedd_dic)
+        vacat_dic.extend(birthday_dic)
         return jsonify (vacat_dic),200
     except Exception as e:
         return jsonify({"message": "failed"}),400
@@ -275,15 +297,22 @@ def get_upcoming_vacation_day():
 
 @app.route('/upcomingfday')
 def get_upcoming_festivals_day():
-    fest_dic = crud.get_upcoming_festivals(session["key"])
-    return jsonify (fest_dic)
+    try:
+        fest_dic = crud.get_upcoming_festivals(session["key"])
+        return jsonify (fest_dic)
+    except Exception as e:
+        return jsonify({"message": "failed"}),400
 
 
 
 @app.route('/upcomingwday')
 def get_upcoming_wedding_day():
-    wedd_dic = crud.get_upcoming_weddings(session["key"])
-    return jsonify (wedd_dic)
+    try:
+        wedd_dic = crud.get_upcoming_weddings(session["key"])
+        return jsonify (wedd_dic),200
+    except Exception as e:
+        return jsonify({"message": "failed"}),400
+    
 
 
 
