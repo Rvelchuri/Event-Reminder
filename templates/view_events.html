@@ -1,7 +1,72 @@
 {% extends 'base.html' %}
 {% block body %}
 
-{% block title %}View/Addthe details of Event{% endblock %}
+
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<div class="container">         
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Email</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody id = "eventstable"> 
+     
+    </tbody>
+  </table>
+</div>
+
+</body>
+<script>  
+  function clickallevents() {
+      $.ajax({
+        url: 'upcomingvday',
+        type: 'GET',
+         headers:  { 
+          "contentType": 'application/json',
+          },
+        success: function (response) {
+          console.log(response)
+          data = response
+          let event_data = ""
+  
+        // $("table.table").empty()
+        for(var count=0; count < response.length; count++){
+         event_data += "<tr><td>" + data[count]["name"] + "</td><td>"+ data[count]["date"] + 
+            "</td><td>" + data[count]["email"] + "</td><td>" + data[count]["type"] + "</td></tr>";
+
+        }  
+        $("#eventstable").append(event_data) 
+        
+                        
+          },
+      })
+    }
+  </script> 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -25,7 +90,7 @@
 </div>
 </div>
 
-<ul>
+<!-- <ul>
   <li><a href = "/birthday">View all birthdays</a></li>
     
 </ul>
@@ -51,10 +116,10 @@
 </ul>
 
 
-<!-- <ul>
+<ul>
   <li><a href = "/addbirthday">Add birthdays</a></li>
     
-</ul> -->
+</ul>
 
 <ul>
   <li><a href = "/adddemise">Add death details </a></li>
@@ -74,17 +139,17 @@
 <ul>
   <li><a href = "/addfestivals">Add festive details</a></li>
     
-</ul>
+</ul> -->
 
-<button name="bdaybutton" value="OK" type="button" onclick="clickfunbday()">check upcoming birthdays</button> 
+<button name="bdaybutton" value="OK" type="button" onclick="clickfunbday()">Send Email to  upcoming birthdays</button> 
  
-<button name="ddaybutton" value="OK" type="button" onclick="clickfundday()">check upcoming remembrance days</button> 
+<!-- <button name="ddaybutton" value="OK" type="button" onclick="clickfundday()">check upcoming remembrance days</button> 
 
 <button name="vdaybutton" value="OK" type="button" onclick="clickfunvday()">check upcoming Vacations</button> 
 
-<button name="fdaybutton" value="OK" type="button" onclick="clickfunfday()">check upcoming Festivals</button> 
+<button name="fdaybutton" value="OK" type="button" onclick="clickfunfday()">check upcoming Festivals</button>  -->
 
-<button name="wdaybutton" value="OK" type="button" onclick="clickfunwday()">check upcoming weddings</button> 
+<button name="wdaybutton" value="OK" type="button" onclick="clickfunwday()">Send Email to upcoming wedding Anniversary</button> 
 
 
 <button name="bdaybutton" value="OK" type="button" onclick="clickallevents()">check all upcoming Events</button>
@@ -94,11 +159,7 @@
 <script>  
 function sendmail(type,email) 
  {
-    // var $row = $(this).closest("tr");    // Find the row
-    // var $text = $row.find(".rec_email").text(); // Find the text
     
-    // Let's test it out
-    // alert($text);
     console.log(type,email);
     $.ajax({
       url: 'sendmail',

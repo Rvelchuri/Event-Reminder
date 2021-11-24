@@ -30,13 +30,15 @@
               <li><a class="dropdown-item" href="/adddemise">Add death details</a></li>
               <li><a class="dropdown-item" href="/addwedding">Add wedding details</a></li>
               <li><a class="dropdown-item" href="/addvacation">Add Vacation details</a></li>
-              <li><a class="dropdown-item" href="/addfestival">Add Festive details</a></li>
+              <li><a class="dropdown-item" href="/addfestivals">Add Festive details</a></li>
             </ul>
           </li>
       </ul>
-
+      
       <form class="form-inline my-2 my-lg-0">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+        <p style = " color:white" >{{ session['name'] }}</p>
+        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button> -->
+        <a class="navbar-brand" href="/logout">Logout</a>
       </form>
     </div>
   </nav>
