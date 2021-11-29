@@ -75,8 +75,6 @@ def signup_user():
 def log_in():
     email = request.form.get("email").lower()
     password = request.form.get("password")
-    
-
     user = crud.login_user(email, password)
     if user:
         key = user.user_id
@@ -109,7 +107,7 @@ def all_birthday():
     birthday = crud.get_birthday(session["key"])
     print(birthday)       
     print ("*******",type(birthday))
-    return render_template("birthday_display.html", birthday = birthday)
+    return render_template("birthday_display.html", birthday = birthday,status=200)
 
 
 
@@ -152,25 +150,22 @@ def all_festivals():
 @app.route('/addbirthday', methods=["GET","POST"])
 def add_birthday():
     """Add birthday"""
-    if request.method == "POST":
+    try:
+        if request.method == "POST":
     
-        email = request.form.get('email')
-        name = request.form.get('name')
-        gender = request.form.get('gender')
-        relation= request.form.get('relation')
-        phone_number = request.form.get('phone_number')
-        birth_date = datetime.strptime(request.form.get("birth_date"),"%Y-%m-%d" )
-
-        new_birthday=crud.create_birthday(email, name, gender,relation,phone_number,birth_date,session['key'])
-        print(new_birthday)
-        flash("You've successfully added birthday details")
-    # return render_template("add_birthday.html")
-    return redirect('/birthday')
-
-
-@app.route('/addbirthday', methods=["GET","POST"])
-def nav_birthday():
-    return render_template("add_birthday.html")
+            email = request.form.get('email')
+            name = request.form.get('name')
+            gender = request.form.get('gender')
+            relation= request.form.get('relation')
+            phone_number = request.form.get('phone_number')
+            birth_date = datetime.strptime(request.form.get("birth_date"),"%Y-%m-%d" )
+            new_birthday=crud.create_birthday(email, name, gender,relation,phone_number,birth_date,session['key'])
+            # pdb.set_trace()
+            print(new_birthday)
+            flash("You've successfully added birthday details")
+        return render_template("add_birthday.html"),201  
+    except Exception as e:
+        return jsonify({"message": "failed"}),400
 
 
 
