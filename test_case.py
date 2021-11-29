@@ -44,12 +44,13 @@ class FlaskTests(TestCase):
 
 	def test_login(self):
 		"""Test login page."""
-		pdb.set_trace()
+		# pdb.set_trace()
 		# headers = {content_type ='multipart/form-data'},
 		result = self.client.post("/login",
-		data={"user_id": "rachel", "password": "123"},
+		data={"email": "suresh@gmail.com", "password": "suresh"},
 		follow_redirects=True,content_type='multipart/form-data',)
-		self.assertIn(b"You are a valued user", result.data)
+		pdb.set_trace()
+		self.assertTrue(result.status_code,200)
 
 
 

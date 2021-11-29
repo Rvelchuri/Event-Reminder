@@ -41,7 +41,7 @@
           data = response
           let event_data = ""
   
-        // $("table.table").empty()
+        $("#eventstable").empty()
         for(var count=0; count < response.length; count++){
          event_data += "<tr><td>" + data[count]["name"] + "</td><td>"+ data[count]["date"] + 
             "</td><td>" + data[count]["email"] + "</td><td>" + data[count]["type"] + "</td></tr>";
@@ -191,7 +191,7 @@ function clickfunbday() {
         for(var count=0; count < response.length; count++){
             html += '<tr>';
             html += '<td>'+(data[count]["name"])+'</td>'; 
-            html += '<td>'+(data[count]["birth_date"])+'</td>'; 
+            html += '<td>'+(data[count]["date"])+'</td>'; 
             html += '<td class="rec_email">'+(data[count]["email"])+'</td>'; 
             
             html += `<td><button type="button" class="use-address" onclick = sendmail('birthday',`+"'"+data[count]["email"]+"'"+")>send Email </td>";

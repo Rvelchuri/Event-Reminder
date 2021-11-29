@@ -109,7 +109,10 @@ def get_user_by_id(user_id):
 def get_upcoming_birthday(user_id):
     # birthdate = db.session.query.(Birthday.birth_date,Birthday.name,Birthday.email,Birthday.phone_number,Birthday.user_id).all()
     birthdate = Birthday.query.filter(Birthday.user_id == user_id).all()
+    str_happy = "Wish Happy birthday"
     str_one = " let them eat cake ...its first birthday"
+    str_five = " let them eat cake ...its fifth birthday"
+    str_ten = " let them eat cake ...its tenth birthday"
     str_sixteen = "sweet sixteen... its 16th birthday"
     str_eighteen = "let them vote....its 18th birthday"
     str_thirty ="lets settle down.... its 30th birthday"
@@ -141,20 +144,26 @@ def get_upcoming_birthday(user_id):
             year = timedelta(days=365)
             special = int((now-day)/year)
             print(special)
-            if special <=1:
+            if special ==1:
                birthdate_dict["message"] = str_one
-            elif special <=16:
+            elif special ==5:
+               birthdate_dict["message"] = str_five
+            elif special ==10:
+               birthdate_dict["message"] = str_ten
+            elif special ==16:
                birthdate_dict["message"] = str_sixteen
-            elif special <=18:
+            elif special ==18:
                birthdate_dict["message"] = str_eighteen
-            elif special <=30:
+            elif special ==30:
                birthdate_dict["message"] = str_thirty
-            elif special <=40:
+            elif special ==40:
                birthdate_dict["message"] = str_forty
-            elif special <=50:
+            elif special ==50:
                birthdate_dict["message"] = str_fifty
-            elif special <=60:
+            elif special ==60:
                birthdate_dict["message"] = str_sixty
+            else:
+                birthdate_dict["message"] = str_happy
           
             birthdate_list.append(birthdate_dict)
             print(birthdate_list)

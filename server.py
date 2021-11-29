@@ -8,16 +8,16 @@ import crud
 from datetime import datetime, date, timedelta
 import os
 import pdb
-
+from flask_mail import Mail, Message
 from jinja2 import StrictUndefined
 
-upcoming_days=14
+
 
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined 
 
-# from flask_mail import Mail, Message
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'top-secret!'
@@ -27,7 +27,7 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'apikey'
 app.config['MAIL_PASSWORD'] = os.environ.get('SENDGRID_API_KEY')
 app.config['MAIL_DEFAULT_SENDER'] = "rajani.velchuri@gmail.com"
-# mail = Mail(app)
+mail = Mail(app)
 
 
 @app.route('/')
@@ -96,7 +96,7 @@ def log_out():
 
 @app.route("/view_events", methods=["GET"])
 def view_events():
-    return render_template('/view_events.html')
+    return render_template('/view_events.html'),200
 
 
 
@@ -317,16 +317,19 @@ def get_upcoming_wedding_day():
 def index():
     try:
         if request.method == 'POST':
-        # pdb.set_trace()
+            pdb.set_trace()
             print (request.data)
             recipient = request.json['recipient']
             type = request.json["type"]
-            msg = Message('Twilio SendGrid Test Email', recipients=[recipient])
-            msg.body = ('Congratulations! You have sent a test email with '
-                    'Twilio SendGrid!')
-            msg.html = ('<h1>Twilio SendGrid Test Email</h1>'
-                    '<p>Congratulations! You have sent a test email with '
-                    '<b>Twilio SendGrid</b>!</p>')
+            mesg= ""
+            if type == "wedding":
+                mesg = " Happy Anniversary"
+            elif type == "birthday":
+                mesg = " Happy Birthday"
+            msg = Message(mesg, recipients=[recipient])
+            # msg.body = ('Congratulations!')
+            msg.html = ('<h1>{}</h1>'
+                    '<p>Congratulations!  </p>'.format(mesg))
             mail.send(msg)
             flash(f'A test message was sent to {recipient}.')
             return jsonify({"message":"success"}),200
