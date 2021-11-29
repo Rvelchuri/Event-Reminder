@@ -72,9 +72,6 @@ def return_birthday():
     return Birthday.query.all()
 
 
-# def return_by_birthday():
-#     return Birthday.query.filter(Birthday.user_id == user_id)
-
 
 def get_birthday(user_id):
     """return all birthdays"""
@@ -119,8 +116,6 @@ def get_upcoming_birthday(user_id):
     str_forty ="still young.... its 40th birthday"
     str_fifty = "Growing old is mandatory... its 50th birthday"
     str_sixty = "getting better everyday... its 60th birthday"
-    
-
     # print(birthdate)
     birthdate_list = []
     
@@ -286,7 +281,7 @@ def get_upcoming_weddings(user_id):
             wedd_list.append(wedd_dict)
         
     return wedd_list
-    # return List[{wedd_list,wedding_list}]
+   
 
 
 
