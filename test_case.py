@@ -1,52 +1,55 @@
-import pytest
+from unittest import TestCase
+from server import app
+from model import connect_to_db, db, Birthday
+from flask import session
+import pdb
 
-# from jsonconfig.get import get_schema 
-
-# import jsonschema
-
-import json
-
-import requests
-
-import time
-
-
-class TestPythonAPIS():
-
-	def setup(self):
-
-		"""
-		Basic setup to be provided for test cases
-
-		"""
-		pass
-
-	# def test_get_response(self):
-
-	# 	"""
-	# 	Testing get request data 
-
-	# 	params:None
-
-	# 	"""
-	# 	get_data=requests.get('http://localhost:3000/users')
-
-	# 	jsonschema.validate(get_data.json(),get_schema)
-
-	# 	assert get_data.status_code == 200
+class FlaskTests(TestCase):
+	def setUp(self):
+		self.client = app.test_client()	
+		# Show Flask errors that happen during tests
+		app.config['TESTING'] = True
+		connect_to_db(app, "postgresql:///testevents")
+		# Create tables and add sample data
+		db.create_all()
+		self.test_login()
+		# self.example_data()
 
 
-	def test_post_response(self):
+	def test_some_flask_route(self):
+		"""Some non-database test..."""
 
-		"""
-		Testing post request data 
+		result = self.client.get("/")
+		self.assertEqual(result.status_code, 200)
+		self.assertIn('<h1>Test</h1>', result.data)
 
-		params:None
+	# def example_data():
+	# 	Birthday.query.delete()
+	# 	# Add sample employees and departments
+	# 	birth = Birthday(email="arya@gmail.com",name="arya",gender = "male",relation = "son",phone_number = "7324062323",birth_date ="2013-01-21")
 
-		"""
 
-		get_data=requests.post('http://localhost:5000/addbirthday',data = {"email":"arya@gmail.com","name":"arya","gender":"male","relation":"son","gender":"male","phone_number":"7324062323","birth_date":"2013-01-21"})
+	# 	db.session.add_all(birth)
+	# 	db.session.commit()
 
-		assert get_data.status_code == 200
 
-	
+	# def test_index(self):
+	#     """Test homepage page."""
+	#     pdb.set_trace()
+	#     result = self.client.get("/birthday")
+	#     self.assertIn(result.status_code,200)
+
+
+
+
+	def test_login(self):
+		"""Test login page."""
+		pdb.set_trace()
+		# headers = {content_type ='multipart/form-data'},
+		result = self.client.post("/login",
+		data={"user_id": "rachel", "password": "123"},
+		follow_redirects=True,content_type='multipart/form-data',)
+		self.assertIn(b"You are a valued user", result.data)
+
+
+
