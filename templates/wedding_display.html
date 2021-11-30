@@ -5,7 +5,7 @@
 <style>
   body {
     
-    background-image: url('/static/img/wedding.jpeg');
+    background-image: url('/static/img/wedding.jpg');
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -21,21 +21,29 @@
 
 
   <h1>All Wedding details</h1>
+  <div class="center">
+    <table class="table table-bordered " border="1">
+        <tr>
+            <th>Mr.Name</th>
+            <th>Mrs.Name</th>
+            <th>Mr.Email</th>
+            <th>Mrs.Email</th>
+            <th>Mr.Phone Number</th>
+            <th>Mrs.Phone Number</th>
+            <th>Relation</th>
+            <th>Date</th>
+        </tr>
+        {% for wed in wedding %}
+            <tr>
+                <td>{{wed.mr_name  }}</td>
+                <td>{{wed.mrs_name}}</td>
+                <td>{{wed.mr_email}}</td>
+                <td>{{wed.mrs_email}}</td>
+                <td>{{wed.mr_Phone_number}}</td>
+                <td>{{wed.mrs_Phone_number}}</td>
+                <td>{{wed.relation }}</td>
+                <td>{{wed.wedding_date}}</td>
+            </tr>
+        {% endfor %}</table>
 
-  <ul>
-    {% for wed in wedding %}
-      <li>
-        
-          {{wed.mr_name }},
-          {{wed.mrs_name }},
-          {{wed.mr_email }},
-          {{wed.mrs_email }},
-          {{wed.mr_Phone_number }},
-          {{wed.mrs_Phone_number }},
-          {{wed.relation }},
-          {{wed.wedding_date}}
-     
-      </li>
-    {% endfor %}
-  </ul>
 {% endblock %}

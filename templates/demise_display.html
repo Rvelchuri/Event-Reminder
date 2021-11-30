@@ -2,10 +2,10 @@
 {% block title %}All death Anniversaries{% endblock %}
 
 {% block body %}
-<!-- <style>
+<style>
   body {
     
-    background-image: url('/static/img/Remembrance.jpeg');
+    background-image: url('/static/img/demise.jpg');
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -15,24 +15,28 @@
 </style>
 
 <body>
-</body> -->
+</body>
 
 
   <h1>All Remembrance Days</h1>
   
-
-  <ul>
-    {% for dem in demise %}
-      <li>
-        
-          {{dem.name}},
-          {{dem.gender}},
-          {{dem.relation}},
-          {{dem.demise_date}}
-
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="center">
+    <table class="table table-bordered " border="1">
+        <tr>
+            <th> Name</th>
+            <th>Gender</th>
+            <th>Relation</th>
+            <th>Date</th>
+        </tr>
+        {% for dem in demise %}
+            <tr>
+                <td>{{dem.name}}</td>
+                <td>{{dem.gender}}</td>
+                <td>{{dem.relation}}</td>
+                <td>{{dem.demise_date}}</td>
+            </tr>
+        {% endfor %}</table>
+ 
 {% endblock %}
 
 

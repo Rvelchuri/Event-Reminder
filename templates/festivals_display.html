@@ -2,18 +2,37 @@
 {% block title %}All Festivals{% endblock %}
 
 {% block body %}
+
+<style>
+  body {
+    
+    background-image: url('/static/img/festivals.jpg');
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+
+<body>
+</body>
+
   <h1>All festivals or important days</h1>
 
-  <ul>
-    {% for fest in festival %}
-      <li>
-        
-          {{fest.festive_name }},
-          {{fest.overview}},
-          {{fest.festive_date}}
-   
-     
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="center">
+    <table class="table table-bordered " border="1">
+        <tr>
+            <th>Festival Name</th>
+            <th>overview</th>
+            <th>Date</th>
+        </tr>
+        {% for fest in festival%}
+            <tr>
+                <td>{{fest.festive_name}}</td>
+                <td>{{fest.overview}}</td>
+                <td>{{fest.festive_date}}</td>
+            </tr>
+        {% endfor %}</table>
+
 {% endblock %}

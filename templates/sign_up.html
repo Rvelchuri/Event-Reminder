@@ -1,20 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+   
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+   </head>
+   <body>
 <h2>Create an Account</h2>
+
 <form action="/users" method="POST">
-  <p>
-   Name <input type="text" name="name">
- </p>
-<p>
-    Phone Number <input type="text" name="phone_number">
-</p>
-<p>
-    Email <input type="text" name="email">
-</p>
 
-  <p>
-    Password <input type="password" name="password">
-  </p>
+    <div class = "festival_form col-lg-4" >
+    <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" class= "form-control" id="name" name="name">
+    </div>
 
-  <p>
-    <input type="submit">
-  </p>
+    <div class="form-group">
+    <label for="phone_number">Phone Number</label>
+    <input type="text" class= "form-control" id="phone_number" name="phone_number">
+    </div>
+
+    <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class= "form-control" id="email" name="email">
+    </div>
+
+    <div class="form-group">
+    <label for="password">Password</label>
+    <input type="text" class= "form-control" id="password" name="password">
+    </div>
+
+    <div class="form-group">
+    <input type="submit" class="btn btn-default" id="btnsubmit" value="submit">
+    </div>
+  
+</div>
 </form>
+</body>
+</html>

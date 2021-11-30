@@ -18,16 +18,19 @@
 <body>
 </body>
   <h1>All vacations list</h1>
-
-  <ul>
-    {% for vac in vacation %}
-      <li>
-        
-          {{vac.location_name }},
-          {{vac.vac_start_date}},
-          {{vac.vac_end_date}}
-     
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="center">
+    <table class="table table-bordered " border="1">
+        <tr>
+            <th>Location Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+        {% for vac in vacation %}
+            <tr>
+                <td>{{vac.location_name }}</td>
+                <td>{{vac.vac_start_date}}</td>
+                <td>{{vac.vac_end_date}}</td>
+            </tr>
+        {% endfor %}</table>
+ 
 {% endblock %}

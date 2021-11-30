@@ -1,40 +1,72 @@
 
 {% extends 'base.html' %}
-{% block body %} Please enter Wedding  details
- 
-<form action ="/addwedding" method = "post">
-  <div class = "wedding_form">
+{% block body %} 
+
+<style>
+    body {
+      
+      background-image: url('/static/img/Engagement.jpg');
+      height: 100%;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+    }
+  </style>
   
+  <body>
+  </body>
 
-  <label for="mr_name">Mr.Name:</label>
-  <input type="text" id="mr_name" name="mr_name"><br><br>
+<div style = "margin-left: 16px"> Enter Wedding details</div>
 
-  <label for="mrs_name">Mrs.Name:</label>
-  <input type="text" id="mrs_name" name="mrs_name"><br><br>
+<form action ="/addwedding" method = "post">
+ 
+    <div class = "wedding_form col-lg-4" >
+    <div class="form-group">
+    <label for="mr_name">Mr.Name:</label>
+    <input type="text"  class= "form-control" id="mr_name" name="mr_name">
+    </div>
+  
+    <div class="form-group">
+    <label for="mrs_name">Mrs.Name:</label>
+    <input type="text" class= "form-control" id="mrs_name" name="mrs_name">
+    </div>
 
-  <label for="mr_email">Mr.Email:</label>
-  <input type="text" id="mr_email" name="mr_email"><br><br>
+  
+    <div class="form-group">
+    <label for="mr_email">Mr.Email:</label>
+    <input type="text" class= "form-control" id="mr_email" name="mr_email">
+    </div>
 
-  <label for="mrs_email">Mrs.Email:</label>
-  <input type="text" id="mrs_email" name="mrs_email"><br><br>
+    <div class="form-group">
+    <label for="mrs_email">Mrs.Email:</label>
+    <input type="text" class= "form-control" id="mrs_email" name="mrs_email">
+    </div>
 
-  <label for="mr_phone_number">Mr.PhoneNumber:</label>
-  <input type="text" id="mr_phone_number" name="mr_phone_number"><br><br>
+    <div class="form-group">
+    <label for="mr_phone_number">Mr.PhoneNumber:</label>
+    <input type="text" class= "form-control" id="mr_phone_number" name="mr_phone_number">
+    </div>
 
-  <label for="mrs_phone_number">Mrs.PhoneNumber:</label>
-  <input type="text" id="mrs_phone_number" name="mrs_phone_number"><br><br>
+    <div class="form-group">
+    <label for="mrs_phone_number">Mrs.PhoneNumber:</label>
+    <input type="text" class= "form-control" id="mrs_phone_number" name="mrs_phone_number">
+    </div>
 
+    <div class="form-group">
+    <label for="relation">Mr/Mrs Relation:</label>
+    <input type="text" class= "form-control" id="relation" name="relation">
+    </div>
 
-  <label for="relation">Mr/Mrs Relation:</label>
-  <input type="text" id="relation" name="relation"><br><br>
+    <div class="form-group">
+    <label for="wedding_date">Date of wedding day:</label>
+    <input type="text" class= "form-control" id="wedding_date" name="wedding_date">
+    </div>
 
-
-
-  <label for="wedding_date">Date of wedding day:</label>
-  <input type="text" id="wedding_date" name="wedding_date"><br><br>
-
-  <input type="submit" id="btnsubmit" value="submit">
-  </div>
+    <div class="form-group">
+    <input type="submit" class="btn btn-default" id="btnsubmit" value="submit">
+    </div>
+    </div>
 </form>
 
 {% endblock %}

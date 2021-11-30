@@ -71,6 +71,7 @@ def signup_user():
     return render_template("sign_up.html")
 
 
+
 @app.route("/login", methods=["POST"])
 def log_in():
     email = request.form.get("email").lower()

@@ -1,4 +1,12 @@
-
+<!doctype html>
+<html>
+  <head>
+   
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+   </head>
 {% block body %}
 
 <style>
@@ -17,40 +25,25 @@
 </body>
 
   <h1>Welcome to Event Reminder</h1>
-  <!-- <div class="site-wrapper-inner">
 
-    <img src="/static/img/reminder.jpeg">
-  </div> -->
- 
-  <!-- <h2>Create an Account</h2>
-  <form action="/users" method="POST">
-        <p>
-            Email <input type="text" name="email">
-        </p>
-
-    <p>
-      Password <input type="password" name="password">
-    </p>
-
-    <p>
-      <input type="submit">
-    </p>
-  </form> -->
-  
   <h2>Log In</h2>
   <form action="/login" method="POST">
-    <p>
-      Email <input type="text" name="email">
-    </p>
+    <div class = "festival_form col-lg-3" >
+    <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class= "form-control" id="email" name="email">
+    </div>
 
-    <p>
-      Password <input type="password" name="password">
-    </p>
+    <div class="form-group">
+    <label for="password">Password</label>
+    <input type="text" class= "form-control" id="password" name="password">
+    </div>
 
-    <p>
-      <input type="submit">
-    </p>
-  </form>
+    <div class="form-group">
+    <input type="submit" class="btn btn-default" id="btnsubmit" value="submit">
+    </div>
+    </div>
+    </form>
   
   <a href="/signup" class="btn btn-primary btn-lg active" role="button">Sign Up</a>
 {% endblock %}

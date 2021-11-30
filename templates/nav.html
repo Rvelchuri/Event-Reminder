@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark purple: #6f42c1;">
     <a class="navbar-brand" href="/view_events">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon">(current)</span>
@@ -34,11 +34,10 @@
             </ul>
           </li>
       </ul>
-      
-      <form class="form-inline my-2 my-lg-0">
-        <p style = " color:white" >{{ session['name'] }}</p>
-        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button> -->
-        <a class="navbar-brand" href="/logout">Logout</a>
-      </form>
+
+      <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <li class="nav-item" style = " color:white; vertical-align: middle;" >{{ session['name'] }}</li>
+        <a class="btn btn-bd-download navbar-brand" href="/logout">Logout</a>
+      </ul>
     </div>
   </nav>

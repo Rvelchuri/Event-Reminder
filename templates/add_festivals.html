@@ -1,21 +1,29 @@
 
 {% extends 'base.html' %}
-{% block body %} Please enter festival details
+{% block body %} 
+<div style = "margin-left: 16px"> Enter Festival details</div>
  
 <form action ="/addfestivals" method = "post">
-  <div class = "festival_form">
+  
+  <div class = "festival_form col-lg-4" >
+  <div class="form-group">
 
   <label for="festive_name">Name:</label>
-  <input type="text" id="festive_name" name="festive_name"><br><br>
+  <input type="text" class= "form-control" id="festive_name" name="festive_name">
+  </div>
 
-  <label for="overview">overview</label>
-  <input type="text" id="overview" name="overview"><br><br>
+  <div class="form-group">
+  <label for="overview">Overview:</label>
+  <input type="text" class= "form-control" id="overview" name="overview">
+  </div>
 
-
+  <div class="form-group">
   <label for="festive_date">Date of festival:</label>
-  <input type="text" id="festive_date" name="festive_date"><br><br>
+  <input type="text"  class= "form-control"  id="festive_date" name="festive_date">
+  </div>
 
-  <input type="submit" id="btnsubmit" value="submit">
+  <div class="form-group">
+  <input type="submit" class="btn btn-default" id="btnsubmit" value="submit">
   </div>
 </form>
 

@@ -1,20 +1,31 @@
 {% extends 'base.html' %}
-{% block body %} Please enter vacation details
- 
+{% block body %} 
+<div style = "margin-left: 16px"> Enter Vacation details</div>
+
+
 <form action ="/addvacation" method = "post">
-  <div class = "vacation_form">
+
+  <div class = "vacation_form col-lg-4" >
+  <div class="form-group">
 
 
   <label for="location_name">Location Name:</label>
-  <input type="text" id="location_name" name="location_name"><br><br>
+  <input type="text" class= "form-control" id="location_name" name="location_name">
+  </div>
 
+  <div class="form-group">
   <label for="vac_start_date">Start Date:</label>
-  <input type="text" id="vac_start_date" name="vac_start_date"><br><br>
-
+  <input type="text" class= "form-control"  id="vac_start_date" name="vac_start_date">
+  </div>
+  
+  <div class="form-group">
   <label for="vac_end_date">End Date:</label>
-  <input type="text" id="vac_end_date" name="vac_end_date"><br><br>
+  <input type="text" class= "form-control"  id="vac_end_date" name="vac_end_date">
+  </div>
 
-  <input type="submit" id="btnsubmit" value="submit">
+  <div class="form-group">
+  <input type="submit" class="btn btn-default" id="btnsubmit" value="submit">
+  </div>
   </div>
 </form>
 

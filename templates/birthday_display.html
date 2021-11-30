@@ -4,13 +4,11 @@
 {% block title %}All Birthdays{% endblock %}
 
 {% block body %}
-
-
   
     <style>
       body {
         
-        background-image: url('/static/img/happy-birthday.jpeg');
+        background-image: url('/static/img/Birthday.jpg');
         height: 100%;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -22,105 +20,26 @@
   <body>
   </body>
 
-
-
-<!-- <div class="modal hide" id="upcomingevents" role="dialog">
-  <div class="modal-dialog modal-lg" role="document">
-  <div class="modal-content">    
-      <div class="modal-header">
-              <h3 class="modal-title">Upcoming Events</h3>
-              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-              </button>
-  </div>
-  <div class="modal-body">
-  
-  
-  </div>
-  <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-  </div>
-</div>
-</div>
-</div>
-<button name="bdaybutton" value="OK" type="button" onclick="clickfunbday()">check upcoming birthdays</button> 
-<a href = "/addbirthday"> <button name="addbdaybutton" value="OK" type="button" >Add birthday</button>  </a> -->
-
 <h1>All birthdays</h1>
+<div class="center">
+  <table class="table table-bordered " border="1">
+      <tr>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Relation</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Date</th>
+      </tr>
+      {% for birth in birthday%}
+          <tr>
+              <td>{{birth.name }}</td>
+              <td>{{birth.gender}}</td>
+              <td>{{birth.relation}}</td>
+              <td>{{birth.email}}</td>
+              <td>{{birth.phone_number}}</td>
+              <td>{{birth.birth_date.date()}}</td>
+          </tr>
+      {% endfor %}</table>
 
-  <ul>
-    {% for birth in birthday %}
-      <li>
-        
-          {{birth.name }},
-          {{birth.gender}},
-          {{birth.relation}} ,
-          {{birth.email}}, 
-          {{birth.phone_number}},
-          {{birth.birth_date.date()}}
-     
-      </li>
-    {% endfor %}
-  </ul>
-  
-
-
-  <!-- <button name="bdaybutton" value="OK" type="button" onclick="clickfunbday()">check upcoming birthdays</button> 
-  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-  
-  <a href = "/addbirthday"> <button name="addbdaybutton" value="OK" type="button" >Add birthday</button>  </a>
-  
-
-<script>  
-  function sendmail(type,email) 
-   {
-      // var $row = $(this).closest("tr");    // Find the row
-      // var $text = $row.find(".rec_email").text(); // Find the text
-      
-      // Let's test it out
-      // alert($text);
-      console.log(type,email);
-      $.ajax({
-        url: 'sendmail',
-        type: 'POST',
-        data:JSON.stringify({'recipient':email,"type":type}), 
-        contentType: 'application/json;charset=UTF-8',
-        success:function (response){
-  
-        }
-      })
-  };
-
-function clickfunbday() {
-  $.ajax({
-    url: 'upcomingbday',
-    type: 'GET',
-     headers:  { 
-      "contentType": 'application/json',
-      },
-    success: function (response) {
-      data = response
-      var datalength = 1;
-      var html="";
-      html += '<table class="table table-bordered" >';
-          html+= `<tr><th>Name</th><th>Birth Date</th><th>E-mail</th><th>Action</th></tr>`
-      for(var count=0; count < response.length; count++){
-          html += '<tr>';
-          html += '<td>'+(data[count]["name"])+'</td>'; 
-          html += '<td>'+(data[count]["birth_date"])+'</td>'; 
-          html += '<td class="rec_email">'+(data[count]["email"])+'</td>'; 
-          // html += '<td>'+(data[count]["phone_number"])+'</td>'; 
-          html += `<td><button type="button" class="use-address" onclick = sendmail('birthday',`+"'"+data[count]["email"]+"'"+")>send Email </td>";
-          html += '</tr>';
-      }
-      html += '</table>';      
-      
-      $('.modal-content .modal-body').empty().append(html) 
-     
-      $('#upcomingevents').modal('show'); 
-                    
-      },
-  })
-}
-</script>   -->
 {% endblock %}

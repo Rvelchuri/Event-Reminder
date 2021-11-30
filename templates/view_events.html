@@ -3,6 +3,22 @@
 
 
 
+
+<style>
+  body {
+    
+    background-image: url('/static/img/AllEvents.jpg');
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+
+<body>
+</body>
+
 <head>
   
   <meta charset="utf-8">
@@ -17,8 +33,9 @@
       <tr>
         <th>Name</th>
         <th>Date</th>
-        <th>Email</th>
         <th>Type</th>
+        <th>Email</th>
+        
       </tr>
     </thead>
     <tbody id = "eventstable"> 
@@ -28,7 +45,10 @@
 </div>
 
 </body>
-<script>  
+<script> 
+$( document ).ready(function() {
+  clickallevents()
+}); 
   function clickallevents() {
       $.ajax({
         url: 'upcomingvday',
@@ -44,7 +64,7 @@
         $("#eventstable").empty()
         for(var count=0; count < response.length; count++){
          event_data += "<tr><td>" + data[count]["name"] + "</td><td>"+ data[count]["date"] + 
-            "</td><td>" + data[count]["email"] + "</td><td>" + data[count]["type"] + "</td></tr>";
+          "</td><td>" + data[count]["type"] + "</td><td>" + data[count]["email"] + "</td></tr>";
 
         }  
         $("#eventstable").append(event_data) 
@@ -90,58 +110,10 @@
 </div>
 </div>
 
-<!-- <ul>
-  <li><a href = "/birthday">View all birthdays</a></li>
-    
-</ul>
-
-<ul>
-  <li><a href = "/demise">View all Remembrance days</a></li>
-    
-</ul>
-
-<ul>
-  <li><a href = "/wedding">View all wedding Anniversaries</a></li>
-    
-</ul>
-
-<ul>
-  <li><a href = "/vacation">View all vacations list</a></li>
-    
-</ul>
-
-<ul>
-  <li><a href = "/festivals">View all festivals or Important days </a></li>
-    
-</ul>
-
-
-<ul>
-  <li><a href = "/addbirthday">Add birthdays</a></li>
-    
-</ul>
-
-<ul>
-  <li><a href = "/adddemise">Add death details </a></li>
-    
-</ul>
-
-<ul>
-  <li><a href = "/addwedding">Add wedding details</a></li>
-    
-</ul>
-
-<ul>
-  <li><a href = "/addvacation">Add vacation details</a></li>
-    
-</ul>
-
-<ul>
-  <li><a href = "/addfestivals">Add festive details</a></li>
-    
-</ul> -->
-
+<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
+<a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Link</a>
 <button name="bdaybutton" value="OK" type="button" onclick="clickfunbday()">Send Email to  upcoming birthdays</button> 
+<button name="wdaybutton" value="OK" type="button" onclick="clickfunwday()">Send Email to upcoming wedding Anniversary</button> 
  
 <!-- <button name="ddaybutton" value="OK" type="button" onclick="clickfundday()">check upcoming remembrance days</button> 
 
@@ -149,10 +121,7 @@
 
 <button name="fdaybutton" value="OK" type="button" onclick="clickfunfday()">check upcoming Festivals</button>  -->
 
-<button name="wdaybutton" value="OK" type="button" onclick="clickfunwday()">Send Email to upcoming wedding Anniversary</button> 
-
-
-<button name="bdaybutton" value="OK" type="button" onclick="clickallevents()">check all upcoming Events</button>
+<!-- <button name="bdaybutton" value="OK" type="button" onclick="clickallevents()">check all upcoming Events</button> -->
 
 
 

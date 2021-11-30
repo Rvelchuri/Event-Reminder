@@ -1,28 +1,58 @@
 
 {% extends 'base.html' %}
-{% block body %} Please enter Birthday details
+{% block body %} 
+
+<style>
+  body {
+    
+    background-image: url('/static/img/Addbirthday.jpg');
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+
+<body>
+</body>
+
+<div style = "margin-left: 16px"> Enter Birthday details</div>
  
-<form action ="/addbirthday" method = "post">
-  <div class = "birthday_form">
-  <label for="email">Email:</label>
-  <input type="text" id="email" name="email"><br><br>
+<form   action ="/addbirthday" method = "post">
+  <div class = "birthday_form col-lg-4" >
+  <div class="form-group">
+  <label for="email">Email: </label>
+  <input type="email" class= "form-control" id="email" name="email">
+  </div>
 
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name"><br><br>
+  <div class="form-group">
+  <label for="name">Name: </label>
+  <input type="text"  class= "form-control"  id="name" name="name">
+  </div>
 
-  <label for="gender">Gender:</label>
-  <input type="text" id="gender" name="gender"><br><br>
+  <div class="form-group">
+  <label for="gender">Gender: </label>
+  <input type="text"  class= "form-control" id="gender" name="gender">
+  </div>
 
-  <label for="relation">Relation:</label>
-  <input type="text" id="relation" name="relation"><br><br>
+  <div class="form-group">
+  <label for="relation">Relation: </label>
+  <input type="text" class= "form-control"  id="relation" name="relation">
+  </div>
 
+  <div class="form-group">
   <label for="phone_number">Phone Number:</label>
-  <input type="text" id="phone_number" name="phone_number"><br><br>
+  <input type="text"  class= "form-control"  id="phone_number" name="phone_number">
+  </div>
 
+  <div class="form-group">
   <label for="birth_date">Date of Birth:</label>
-  <input type="text" id="birth_date" name="birth_date"><br><br>
+  <input type="text" class= "form-control"  id="birth_date" name="birth_date">
+  </div>
 
-  <input type="submit" id="btnsubmit" value="submit">
+  <div class="form-group">
+  <input type="submit" class="btn btn-default" id="btnsubmit" value="submit">
   </div>
 </form>
 
