@@ -2,12 +2,13 @@
 {% block body %}
 
 
-
+<link rel="stylesheet" href = "/static/css/birthday.css">
 
 <style>
   body {
     
-    background-image: url('/static/img/AllEvents.jpg');
+    background-image: url('/static/img/Homepage.jpg');
+    backdrop-filter: blur(400px);
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -77,19 +78,6 @@ $( document ).ready(function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="modal hide" id="upcomingevents" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">    
@@ -109,21 +97,10 @@ $( document ).ready(function() {
 </div>
 </div>
 </div>
-
-<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
-<a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Link</a>
-<button name="bdaybutton" value="OK" type="button" onclick="clickfunbday()">Send Email to  upcoming birthdays</button> 
-<button name="wdaybutton" value="OK" type="button" onclick="clickfunwday()">Send Email to upcoming wedding Anniversary</button> 
- 
-<!-- <button name="ddaybutton" value="OK" type="button" onclick="clickfundday()">check upcoming remembrance days</button> 
-
-<button name="vdaybutton" value="OK" type="button" onclick="clickfunvday()">check upcoming Vacations</button> 
-
-<button name="fdaybutton" value="OK" type="button" onclick="clickfunfday()">check upcoming Festivals</button>  -->
-
-<!-- <button name="bdaybutton" value="OK" type="button" onclick="clickallevents()">check all upcoming Events</button> -->
-
-
+<div class="btn-group" role="group" ></div>
+<button name="bdaybutton" class="btn btn-secondary btn-lg active" value="OK" type="button" onclick="clickfunbday()">Send Email to  upcoming birthdays</button> 
+<button name="wdaybutton" class="btn btn-secondary btn-lg active" value="OK" type="button" onclick="clickfunwday()">Send Email to upcoming wedding Anniversary</button> 
+</div>
 
 <script>  
 function sendmail(type,email) 

@@ -318,7 +318,7 @@ def get_upcoming_wedding_day():
 def index():
     try:
         if request.method == 'POST':
-            pdb.set_trace()
+            # pdb.set_trace()
             print (request.data)
             recipient = request.json['recipient']
             type = request.json["type"]

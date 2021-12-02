@@ -16,19 +16,19 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" href="/birthday">View all birthdays</a></li>
-              <li><a class="dropdown-item" href="/demise">view all Remembrance days</a></li>
-              <li><a class="dropdown-item" href="/wedding">view all wedding Anniversaries</a></li>
-              <li><a class="dropdown-item" href="/vacation">view all vacation list</a></li>
-              <li><a class="dropdown-item" href="/festivals">view all Festivals list</a></li>
+              <li><a class="dropdown-item" href="/demise">View all remembrance days</a></li>
+              <li><a class="dropdown-item" href="/wedding">View all wedding Anniversaries</a></li>
+              <li><a class="dropdown-item" href="/vacation">View all vacation list</a></li>
+              <li><a class="dropdown-item" href="/festivals">View all festivals list</a></li>
             </ul>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Add Events
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="/addbirthday">Add birthdays</a></li>
-              <li><a class="dropdown-item" href="/adddemise">Add death details</a></li>
-              <li><a class="dropdown-item" href="/addwedding">Add wedding details</a></li>
+              <li><a class="dropdown-item" href="/addbirthday">Add Birthdays</a></li>
+              <li><a class="dropdown-item" href="/adddemise">Add Death details</a></li>
+              <li><a class="dropdown-item" href="/addwedding">Add Wedding details</a></li>
               <li><a class="dropdown-item" href="/addvacation">Add Vacation details</a></li>
               <li><a class="dropdown-item" href="/addfestivals">Add Festive details</a></li>
             </ul>
@@ -36,7 +36,7 @@
       </ul>
 
       <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-        <li class="nav-item" style = " color:white; vertical-align: middle;" >{{ session['name'] }}</li>
+        <li class="nav-item" style="color:white;"><span class="nav-link">{{ session['name'] }}</span></li>
         <a class="btn btn-bd-download navbar-brand" href="/logout">Logout</a>
       </ul>
     </div>

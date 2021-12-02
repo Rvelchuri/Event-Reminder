@@ -132,7 +132,7 @@ def get_upcoming_birthday(user_id):
         else:
             day_this_year = datetime(year=datetime.now().year, month=day.month, day=day.day)
 
-        nextday_date = datetime.now() + timedelta(days=15)
+        nextday_date = datetime.now() + timedelta(days=90)
         if day_this_year > now and day_this_year < nextday_date:
             birthdate_dict["name"] = bday.name
             birthdate_dict["date"] = bday.birth_date
@@ -140,7 +140,7 @@ def get_upcoming_birthday(user_id):
             birthdate_dict["type"] = "birthday"
            
             # birthdate_list.append(birthdate_dict)
-            # pdb.set_trace()
+            # pdb.set_trace()   
             year = timedelta(days=365)
             special = int((now-day)/year)
             print(special)

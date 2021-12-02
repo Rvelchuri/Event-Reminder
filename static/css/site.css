@@ -1,4 +1,4 @@
-/* .grid {
+.grid {
   display: grid;
   grid-template-columns: 3fr 3fr 3fr 3fr;
   grid-gap: 20px;
@@ -17,7 +17,8 @@ div.card {
 
 body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
+  background-color: antiquewhite;
 }
 img {
   height: 7em;
-} */
+}

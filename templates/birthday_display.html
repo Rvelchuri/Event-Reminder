@@ -3,12 +3,14 @@
 
 {% block title %}All Birthdays{% endblock %}
 
+
 {% block body %}
   
     <style>
       body {
         
-        background-image: url('/static/img/Birthday.jpg');
+        background-image: url('/static/img/Homepage.jpg');
+        backdrop-filter: blur(400px);
         height: 100%;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -19,6 +21,9 @@
   
   <body>
   </body>
+
+<link rel="stylesheet" href = "/static/css/birthday.css">
+ 
 
 <h1>All birthdays</h1>
 <div class="center">
@@ -41,5 +46,6 @@
               <td>{{birth.birth_date.date()}}</td>
           </tr>
       {% endfor %}</table>
+      
 
 {% endblock %}

@@ -1,11 +1,10 @@
-
 body {
-    background-color: rgb(112, 134, 130);
+    /* background-color: rgb(106, 106, 224);
+    background-size: cover;
 
-
-    color: white;
+    color: rgb(255, 255, 255); */
     text-align: center;
-}
+} 
 
 
 .site-wrapper {
@@ -24,9 +23,4 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;  
-}
-
-.form-group{
-    /* margin: 0 auto; */
-    padding-left: 50%;
 }
