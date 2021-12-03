@@ -32,7 +32,7 @@ mail = Mail(app)
 
 @app.route('/')
 def homepage():
-    return render_template('homepage.html')
+    return render_template('homepage.html',data = "")
 
 
 def all_users():
@@ -72,7 +72,7 @@ def signup_user():
 
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["POST","GET"])
 def log_in():
     email = request.form.get("email").lower()
     password = request.form.get("password")
@@ -83,23 +83,21 @@ def log_in():
         session['name'] = user.name
         # flash('Logged in!')
     else:
-       flash("Try again")
-    return redirect('/view_events')
+       msg = "please enter valid user name and password "
+       return render_template("homepage.html",data = msg)
+    return redirect("/view_events")
+
 
 @app.route("/logout")
 def log_out():
     session["key"] = ""
-    return render_template("homepage.html")
 
-
-
+    return render_template("homepage.html",data= "")
 
 
 @app.route("/view_events", methods=["GET"])
 def view_events():
     return render_template('/view_events.html'),200
-
-
 
 
 @app.route('/birthday')
@@ -326,7 +324,7 @@ def index():
             if type == "wedding":
                 mesg = " Happy Anniversary"
             elif type == "birthday":
-                mesg = " Happy Birthday"
+                mesg = " Happy Birthday...Hope  all your dreams come true...enjoy you day"
             msg = Message(mesg, recipients=[recipient])
             # msg.body = ('Congratulations!')
             msg.html = ('<h1>{}</h1>'
