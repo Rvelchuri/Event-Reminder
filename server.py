@@ -322,7 +322,7 @@ def index():
             type = request.json["type"]
             mesg= ""
             if type == "wedding":
-                mesg = " Happy Anniversary"
+                mesg = " Happy Anniversary...love and Patience keeps both you together"
             elif type == "birthday":
                 mesg = " Happy Birthday...Hope  all your dreams come true...enjoy you day"
             msg = Message(mesg, recipients=[recipient])
@@ -338,12 +338,11 @@ def index():
     
     
 
-
-
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
     connect_to_db(app)
-    app.run(host="0.0.0.0", debug=True)
+    # app.run(host="0.0.0.0", debug=True)
+    app.run()
 
 
 
